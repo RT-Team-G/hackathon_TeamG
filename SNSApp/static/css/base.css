@@ -1,2 +1,10 @@
 /* このファイルは共通のcssを書きます */
-.{}
+*{
+    box-sizing: border-box;
+}
+
+/* 今のところフォントはゴシック系にしてます変更がある時はここで */
+body{
+    margin: 0;
+    font-family:sans-serif,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}

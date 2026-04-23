@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}ここにタイトルを入れる{% endblock %}
-    <meta name="vieport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% comment %} cssのファイルを読み込む↓ {% endcomment %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css')}}">
@@ -14,7 +14,15 @@
 </head>
 
 <body>
+    {% comment %} header.htmlの部分を継承することが書いてある {% endcomment %}
+     {% include 'common/header.html' %}
 
+     {% comment %} 今度はここにcontentが入ることがある {% endcomment %}
+     {% block content%}{% endblock %}
 
+     {% comment %} 最後にフッターが入ることがある {% endcomment %}
+     {% include 'common/footer.html '%}
 
-</body>    
+</body>
+
+</html>
