@@ -14,6 +14,47 @@
             <h1>みんなの頑張り（仮）</h1>
         </div>
 
+        <div class="pankuzu">
+        {% comment %} ここにパンくずリストを作るかどうか {% endcomment %}
+        </div>
+
+        <div class="post-card-wrapper">
+            <div class="post-card">
+                <div class="dekita">
+                    {% comment %} ここにできた時のスタンプのようなもの {% endcomment %}
+                </div>
+
+                {% comment %} ３ブロックにカード内を分けるとしてここは左↓ {% endcomment %}
+                <div class="post-left">
+                    <div class="post-user">
+                        {% comment %} postしたユーザーの名前ここに入ります {% endcomment %}
+                        <span class="display-name">{{ post.user_name }}</span>
+                    </div>
+                </div>
+
+                {% comment %} ここは真ん中↓ {% endcomment %}
+                <div class="post-center">
+                    {% comment %} トレーニングを選んだものがここに列挙されるように↓ {% endcomment %}
+                    <div class="training-wrapper">
+                        <ul>
+                            <li>選択されたトレーニング</li>
+                            <li>選択されたトレーニング</li>
+                            <li>選択されたトレーニング</li>
+                        </ul>
+                    </div>
+                </div>
+
+                {% comment %} ここは右↓ {% endcomment %}
+                <div class="post-right">
+                    <div class="post-time">{{ post.created_at }}</div>
+                    <div class="good-comments">
+                        <div class="good">いいね（）</div>
+                        <div class="comments">コメント（）</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </main>
 
 </div>
