@@ -45,7 +45,7 @@ CREATE TABLE
 CREATE TABLE 
     Posts (
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT ,
-        user_id BIGINT UNSIGNED NOT NULL, 
+        user_id BIGINT UNSIGNED NOT NULL, -- FK
         content TEXT,
         created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         -- 主キー
@@ -80,8 +80,8 @@ CREATE TABLE
 CREATE TABLE 
     Comments (
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-        user_id BIGINT UNSIGNED NOT NULL,
-        post_id BIGINT UNSIGNED NOT NULL,
+        user_id BIGINT UNSIGNED NOT NULL, -- FK
+        post_id BIGINT UNSIGNED NOT NULL, -- FK
         content TEXT,
         created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
         --主キー
@@ -139,11 +139,34 @@ CREATE TABLE
 
 --テスト用 Users
 INSERT INTO Users (name, email, password) VALUES 
-('佐藤一郎', 'sato@example', '12345'),
-('鈴木次郎', 'suzuki@example', '98765')
+('佐藤一郎', 'sato@example', '12345'), 
+('鈴木次郎', 'suzuki@example', '98765');
 
--- Posts
+-- Posts 佐藤user1, 鈴木user2
 INSERT INTO Posts (user_id, content) VALUES 
 (1, 'こんにちは!初めての投稿です'),
 (1, '今日は腕立てふせ10回やりました！'),
-(2, '今日はスクワット1000かいやりました。')
+(2, '今日はスクワット1000かいやりました。');
+
+--Trainingテーブル
+INSERT INTO Training (menu_name) VALUES 
+('腕立伏せ'), ('スクワット'), ('ブランチ'), ('腹筋');
+
+-- Reactionテーブル
+INSERT INTO Reactions (reaction) VALUES 
+('🔥'), ('お疲れ！'), ('💯'), ('(・∀・)ｲｲﾈ!!');
+
+-- Commentsテーブル
+INSERT INTO Comments (user_id, post_id, content) VALUES
+(2, 1, "すごい！前より回数多い！"),
+(1, 2, "疲れたあああああ");
+
+-- Post_Reactionテーブル
+INSERT INTO Post_Reaction (user_id, post_id, reaction_id) VALUES
+(1, 2, 1),
+(2, 1, 2);
+
+-- Post_Reactionテーブル
+INSERT INTO Post_Training (user_id, post_id, training_id, reps, time, set) VALUES
+(1, 2, 1, 10, 30, 3),
+(2, 1, 2, 20, 60, 2);
