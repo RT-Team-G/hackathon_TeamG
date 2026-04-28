@@ -6,7 +6,16 @@
 {% comment %} もしこのページだけのcssファイルを作った場合ここでlink relさせる {% endcomment %}
 {% endblock %}
 
+
+<!--この下のheadはテスト用のもの。Jinja2を使う時には消すかコメントアウトする-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<link rel="stylesheet" href="../../static/css/base.css">
+</head>
+
 {% block content %}
+
 
 <div class="page-posts">
     <main>
@@ -15,26 +24,26 @@
         </div>
 
         <div class="pankuzu">
-        {% comment %} ここにパンくずリストを作るかどうか {% endcomment %}
+        <!-- ここにパンくずリストを作るかどうか -->
         </div>
 
         <div class="post-card-wrapper">
             <div class="post-card">
                 <div class="dekita">
-                    {% comment %} ここにできた時のスタンプのようなもの {% endcomment %}
+                    <!-- ここにできた時のスタンプのようなもの -->
                 </div>
 
-                {% comment %} ３ブロックにカード内を分けるとしてここは左↓ {% endcomment %}
+                <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
                 <div class="post-left">
                     <div class="post-user">
-                        {% comment %} postしたユーザーの名前ここに入ります {% endcomment %}
+                        <!-- postしたユーザーの名前ここに入ります -->
                         <span class="display-name">{{ post.user_name }}</span>
                     </div>
                 </div>
 
-                {% comment %} ここは真ん中↓ {% endcomment %}
+                <!-- ここは真ん中↓ -->
                 <div class="post-center">
-                    {% comment %} トレーニングを選んだものがここに列挙されるように↓ {% endcomment %}
+                    <!--トレーニングを選んだものがここに列挙されるように↓ -->
                     <div class="training-wrapper">
                         <ul>
                             <li>選択されたトレーニング</li>
@@ -44,7 +53,77 @@
                     </div>
                 </div>
 
-                {% comment %} ここは右↓ {% endcomment %}
+                <!-- ここは右↓ -->
+                <div class="post-right">
+                    <div class="post-time">{{ post.created_at }}</div>
+                    <div class="good-comments">
+                        <div class="good">いいね（）</div>
+                        <div class="comments">コメント（）</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="post-card">
+                <div class="dekita">
+                    <!-- ここにできた時のスタンプのようなもの -->
+                </div>
+
+                <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
+                <div class="post-left">
+                    <div class="post-user">
+                        <!-- postしたユーザーの名前ここに入ります -->
+                        <span class="display-name">{{ post.user_name }}</span>
+                    </div>
+                </div>
+
+                <!--ここは真ん中↓ -->
+                <div class="post-center">
+                    <!-- トレーニングを選んだものがここに列挙されるように↓ -->
+                    <div class="training-wrapper">
+                        <ul>
+                            <li>選択されたトレーニング</li>
+                            <li>選択されたトレーニング</li>
+                            <li>選択されたトレーニング</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ここは右↓ -->
+                <div class="post-right">
+                    <div class="post-time">{{ post.created_at }}</div>
+                    <div class="good-comments">
+                        <div class="good">いいね（）</div>
+                        <div class="comments">コメント（）</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="post-card">
+                <div class="dekita">
+                    <!-- ここにできた時のスタンプのようなもの -->
+                </div>
+
+                <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
+                <div class="post-left">
+                    <div class="post-user">
+                        <!-- postしたユーザーの名前ここに入ります -->
+                        <span class="display-name">{{ post.user_name }}</span>
+                    </div>
+                </div>
+
+                <!-- ここは真ん中↓ -->
+                <div class="post-center">
+                    <!-- トレーニングを選んだものがここに列挙されるように↓ -->
+                    <div class="training-wrapper">
+                        <ul>
+                            <li>選択されたトレーニング</li>
+                            <li>選択されたトレーニング</li>
+                            <li>選択されたトレーニング</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ここは右↓ -->
                 <div class="post-right">
                     <div class="post-time">{{ post.created_at }}</div>
                     <div class="good-comments">
@@ -59,5 +138,16 @@
 
 </div>
 
+<div class="footer-menu">
+    <button>
+        <a href="">トップ</a>
+    </button>
+    <button>
+        <a href="">トレーニング</a>
+    </button>
+</div>
+
 
 {% endblock %}
+
+</html>
