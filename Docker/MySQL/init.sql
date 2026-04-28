@@ -1,25 +1,25 @@
 -- もしも古いsnsappがあったらいったん消す(やり直し用)
-DROP DATABASE IF EXISTS snsapp;
+-- DROP DATABASE IF EXISTS snsapp;
 
 -- もしtestuserがいたらいったん消す
-DROP USER IF EXISTS 'testuser'@'%';
+-- DROP USER IF EXISTS 'testuser'@'%';
 
 
---　testuserを新しく作成
-CREATE USER 'testuser'@'%' IDENTIFIED BY 'testuser';
+-- testuserを新しく作成
+-- CREATE USER 'testuser'@'%' IDENTIFIED BY 'testuser';
 
 -- snsappデータベースを新しく作成(日本語・絵文字対応)
-CREATE DATABASE IF NOT EXISTS snsapp
-    DEFAULT CHARACTER SET utf8mb4
-    DEFAULT COLLATE utf8mb4_unicode_ci;
+-- CREATE DATABASE IF NOT EXISTS snsapp
+    -- DEFAULT CHARACTER SET utf8mb4
+    -- DEFAULT COLLATE utf8mb4_unicode_ci;
 
 -- testuserにsnsappの全権限を付与
-GRANT ALL PRIVILEGES ON snsapp. * TO 'testuser'@'%';
+-- GRANT ALL PRIVILEGES ON snsapp. * TO 'testuser'@'%';
 
 -- 設定を即座に反映させる
-FLUSH PRIVILEGES;
+-- FLUSH PRIVILEGES;
 
---snsappで作業開始宣言
+-- snsappで作業開始宣言
 USE snsapp;
 
 /*ユーザー管理テーブル
@@ -41,6 +41,26 @@ CREATE TABLE
         PRIMARY KEY (id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
+-- Trainingテーブル作成
+CREATE TABLE 
+    Training (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+        menu_name VARCHAR(255) NOT NULL,
+        -- 主キー
+        PRIMARY KEY (id)
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+-- Reactions テーブルの作成
+CREATE TABLE 
+    Reactions (
+       id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+       reaction TEXT,
+       created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+       -- 主キー
+       PRIMARY KEY (id) 
+    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+
+  
 -- Postテーブル作成
 CREATE TABLE 
     Posts (
@@ -57,25 +77,6 @@ CREATE TABLE
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 
--- Trainingテーブル作成
-CREATE TABLE 
-    Training (
-        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-        menu_name VARCHAR(255) NOT NULL,
-        -- 主キー
-        PRIMARY KEY (id)
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-
--- Reactions テーブルの作成
-CREATE TABLE 
-    Reactions (
-       id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-       reaction TEXT,
-       created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-       --主キー
-       PRIMARY KEY (id) 
-    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-
 -- Commentsテーブル作成
 CREATE TABLE 
     Comments (
@@ -84,31 +85,31 @@ CREATE TABLE
         post_id BIGINT UNSIGNED NOT NULL, -- FK
         content TEXT,
         created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-        --主キー
+        -- 主キー
         PRIMARY KEY (id),
-        --インデックス索引
+        -- インデックス索引
         KEY idx_comments_user_id (user_id),
         KEY idx_comments_post_id (post_id),
-        --外部キー
+        -- 外部キー
         CONSTRAINT fk_comments_user FOREIGN KEY (user_id) REFERENCES Users (id),
         CONSTRAINT fk_comments_post FOREIGN KEY (post_id) REFERENCES Posts (id)
     ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 -- Post_Reactionテーブルの作成
 CREATE TABLE 
-    PostReaction (
+    Post_Reaction (
         id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
         user_id BIGINT UNSIGNED NOT NULL,
         post_id BIGINT UNSIGNED NOT NULL,
         reaction_id BIGINT UNSIGNED NOT NULL,
         created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-        --主キー
+        -- 主キー
         PRIMARY KEY (id),
-        --インデクス索引
+        -- インデクス索引
         KEY idx_post_reaction_user_id (user_id),
         KEY idx_post_reaction_post_id (post_id),
         KEY idx_post_reaction_reaction_id (reaction_id),
-        --外部キー
+        -- 外部キー
         CONSTRAINT fk_post_reaction_user FOREIGN KEY (user_id) REFERENCES Users (id),
         CONSTRAINT fk_post_reaction_post FOREIGN KEY (post_id) REFERENCES Posts (id),
         CONSTRAINT fk_post_reaction_reaction FOREIGN KEY (reaction_id) REFERENCES Reactions (id)
@@ -122,22 +123,22 @@ CREATE TABLE
         post_id BIGINT UNSIGNED NOT NULL,
         training_id BIGINT UNSIGNED NOT NULL,
         reps INT,
-        time INT,
-        set INT,
+        training_time INT,
+        set_count INT,
         created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-        --主キー
+        -- 主キー
         PRIMARY KEY (id),
-        --インデックス索引
+        -- インデックス索引
         KEY idx_post_training_user_id (user_id),
         KEY idx_post_training_post_id (post_id),
         KEY idx_post_training_training_id (training_id),
-        --外部キー
+        -- 外部キー
         CONSTRAINT fk_post_training_user FOREIGN KEY (user_id) REFERENCES Users (id),
         CONSTRAINT fk_post_training_post FOREIGN KEY (post_id) REFERENCES Posts (id),
         CONSTRAINT fk_post_training_training FOREIGN KEY (training_id) REFERENCES Training (id)
    ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
---テスト用 Users
+-- テスト用 Users
 INSERT INTO Users (name, email, password) VALUES 
 ('佐藤一郎', 'sato@example', '12345'), 
 ('鈴木次郎', 'suzuki@example', '98765');
@@ -148,7 +149,7 @@ INSERT INTO Posts (user_id, content) VALUES
 (1, '今日は腕立てふせ10回やりました！'),
 (2, '今日はスクワット1000かいやりました。');
 
---Trainingテーブル
+-- Trainingテーブル
 INSERT INTO Training (menu_name) VALUES 
 ('腕立伏せ'), ('スクワット'), ('ブランチ'), ('腹筋');
 
@@ -166,7 +167,7 @@ INSERT INTO Post_Reaction (user_id, post_id, reaction_id) VALUES
 (1, 2, 1),
 (2, 1, 2);
 
--- Post_Reactionテーブル
-INSERT INTO Post_Training (user_id, post_id, training_id, reps, time, set) VALUES
+-- Post_Trainingテーブル
+INSERT INTO Post_Training (user_id, post_id, training_id, reps, training_time, set_count) VALUES
 (1, 2, 1, 10, 30, 3),
 (2, 1, 2, 20, 60, 2);
