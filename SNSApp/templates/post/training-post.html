@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %} トレーニング選択・投稿画面 {% endblock %}
+
+    {% block page_css %}
+    <!-- <link rel = "stylesheet" href = "{{ url_for('static', filename = 'css/training-post.css') }}"> -->
+    {% endblock %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<link rel="stylesheet" href="../static/css/base.css">
+</head>
+    {% block content %}
+    <div>
+        <main>
+            <form>
+                <h2>今日のトレーニング</h2>  
+                <p>※複数選択可</p>  
+                <div>
+                    <div class="#">
+                        {% for i in range(5) %}
+                            <div class="#">
+                                <select name="menu[]">
+                                    <option value="" disabled selected hidden>選んでください</option>
+                                    {% for choice in choices %}
+                                    <option value="{{ choice.id }}">{{ choice.menu_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="#">
+                                <label>
+                                    <select name="rep[]">
+                                        {% for j in range(30) %}
+                                        <option value="{{ j+1 }}">{{ j+1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    回
+                                </label>
+                                <label>
+                                    <select name="set[]">
+                                        {% for k in range(5) %}
+                                        <option value="{{ k+1 }}">{{ k+1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    セット
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label>
+                            その他
+                            <input type="text" name="other[]">
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <select name="rep[]">
+                                {% for j in range(30) %}
+                                    <option value="{{ j+1 }}">{{ j+1 }}</option>
+                                {% endfor %}
+                            </select>
+                            回
+                        </label>
+                        <label>
+                            <select name="set[]">
+                                {% for k in range(5) %}
+                                    <option value="{{ k+1 }}">{{ k+1 }}</option>
+                                {% endfor %}
+                            </select>
+                            セット
+                        </label>
+                    </div>
+                    <div>
+                        <textarea placeholder="自由記述欄（感想や言い訳など・・）" name="#"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" name="#">できた</button>
+                    </div>
+                </div>              
+            </form>
+        </main>
+    </div>
+    {% endblock %}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
