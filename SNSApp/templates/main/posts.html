@@ -12,11 +12,13 @@
 <html lang="ja">
 <head>
 <link rel="stylesheet" href="../../static/css/base.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 {% block content %}
 
-
+<!--このmainもテスト用なので消します-->
+<main>
 <div class="page-posts">
     <main>
         <div  class="page-title">
@@ -31,6 +33,7 @@
             <div class="post-card">
                 <div class="dekita">
                     <!-- ここにできた時のスタンプのようなもの -->
+                     <p>できた！</p>
                 </div>
 
                 <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
@@ -44,7 +47,7 @@
                 <!-- ここは真ん中↓ -->
                 <div class="post-center">
                     <!--トレーニングを選んだものがここに列挙されるように↓ -->
-                    <div class="training-wrapper">
+                    <div class="training-list">
                         <ul>
                             <li>選択されたトレーニング</li>
                             <li>選択されたトレーニング</li>
@@ -63,6 +66,7 @@
                 </div>
 
             </div>
+            <!--今はコピペで三つ同じものがあるけどJinja2では繰り返しを行う-->
             <div class="post-card">
                 <div class="dekita">
                     <!-- ここにできた時のスタンプのようなもの -->
@@ -79,7 +83,7 @@
                 <!--ここは真ん中↓ -->
                 <div class="post-center">
                     <!-- トレーニングを選んだものがここに列挙されるように↓ -->
-                    <div class="training-wrapper">
+                    <div class="training-list">
                         <ul>
                             <li>選択されたトレーニング</li>
                             <li>選択されたトレーニング</li>
@@ -114,7 +118,7 @@
                 <!-- ここは真ん中↓ -->
                 <div class="post-center">
                     <!-- トレーニングを選んだものがここに列挙されるように↓ -->
-                    <div class="training-wrapper">
+                    <div class="training-list">
                         <ul>
                             <li>選択されたトレーニング</li>
                             <li>選択されたトレーニング</li>
@@ -135,17 +139,14 @@
             </div>
         </div>
     </main>
-
-</div>
-
 <div class="footer-menu">
-    <button>
-        <a href="">トップ</a>
-    </button>
-    <button>
-        <a href="">トレーニング</a>
-    </button>
+    <a href="" class="footer-btn">トップ</a>
+    <a href="" class="footer-btn">トレーニング</a>
 </div>
+</div>
+
+
+</main>
 
 
 {% endblock %}
