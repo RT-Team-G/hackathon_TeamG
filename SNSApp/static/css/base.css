@@ -1,0 +1,154 @@
+/* このファイルは共通のcssのつもりでしたができたら全部書きます */
+/* ここからは共通のcss */
+*{
+    box-sizing: border-box;
+}
+
+/* 今のところフォントはゴシック系にしてます変更がある時はここで */
+body{
+    margin: 0;
+    font-family:sans-serif,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #f7f6f5;
+}
+
+h1{
+    font-size: 24px;
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    color:#24140e;
+}
+
+button{
+    width: 100px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+main{
+    background-color: #f7f6f5;
+    font-size: 16px;
+}
+
+
+
+
+/* postsのデザイン */
+.post-card-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.post-card{
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    box-shadow: 10px 5px 5px #333;
+    margin-bottom: 32px;
+    width: 100%;
+    max-width: 354px;
+}
+
+.post-left{
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    flex-shrink: 0;
+    min-width: 0;
+    max-width: 30%;
+}
+
+.display-name{
+    white-space: nowrap;
+    overflow-wrap: break-word;
+}
+.display-name,
+.post-time{
+    overflow-wrap: break-word;
+}
+
+.post-center{
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex:1;
+    /* overflow: hidden; */
+}
+
+.training-list{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 4px 12px;
+    padding: 0;
+    margin: 0;
+}
+
+.training-list li{
+    overflow-wrap: break-word;
+    font-size: 12px;
+    white-space: nowrap;
+    list-style: none;
+    word-break: break-word;
+}
+
+.training-list ul{
+    padding: 0;
+}
+
+.post-right{
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    flex-shrink: 0;
+    flex: 0 0 auto;
+    min-width: 0;
+    max-width: 30%;
+    text-align: right;
+    overflow-wrap: break-word;
+}
+
+/*フッターっぽいところにあるボタン用のところ*/
+.footer-menu{
+    text-align: center;
+}
+
+.footer-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border: #24140e solid 1px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/*できたスタンプ見たいなもの角度とかここで調節。文字変えたい時はhtmlの方で*/
+.dekita{
+    position:absolute ;
+    top:-8px;
+    left: 8px;
+    transform: rotate(-30deg);
+    color: red;
+    opacity: 0.5;
+}
+
+/*パンくずリストのところ*/
+.breadcrumb{
+    font-size: 11px;
+}
+
+.breadcrumb a{
+    text-decoration: none;
+    color: #333;
+}
+
+.breadcrumb span{
+    margin: 0 4px;
+}
