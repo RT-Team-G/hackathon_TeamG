@@ -1,0 +1,29 @@
+<!-- # range関数の数字はセレクトボックスの数(一旦5に) -->
+{% for i in range(5) %}
+  <select name="menu[]">
+      {% for choice in choices %}
+          <!-- # training_idと同じ -->
+          <option value="{{ choice.id }}">
+              {{ choice.menu_name }}
+          </option>
+      {% endfor %}
+  </select>
+  <select name="rep[]">
+      {% for j in range(30) %}  <!-- # 一旦30回まで選択可として設定 -->
+          <option>
+              {{ j+1 }}
+          </option>
+      {% endfor %}
+  </select>
+  <select name="set[]">
+      {% for k in range(5) %} <!-- # 一旦5セットまで選択可として設定 -->
+          <option>
+              {{ k+1 }}
+          </option>
+      {% endfor %}
+  </select>
+{% endfor %}
+
+<button class="btn-primary" type="submit">
+    投稿する
+</button>

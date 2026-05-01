@@ -1,12 +1,17 @@
 from flask import Flask, request, redirect, render_template, session, flash, abort, url_for
 from flask_wtf.csrf import CSRFProtect
 from datetime import timedelta
+from util.DB import DB
 import hashlib
 import uuid
 import re
 import os
 
-from select_menu import Menu
+from select_menu import Menu, Rec
+from all_posts import Post
+
+# 初期起動時にコネクションプールを作成し接続を確立
+db_pool = DB.init_db_pool()
 
 # 定数定義
 EMAIL_PATTERN = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
@@ -112,67 +117,46 @@ def login_process():
 # トレーニングメニュー選択・投稿作成画面表示
 @app.route('/post', methods=['GET'])
 def post_view():
-    user_id = session.get('user_id')
-    if user_id is None:
-        return redirect(url_for('login_view'))
-    else:
-        choices = Menu.get_menu()
-    return render_template('main/posts.html', choices=choices)
+    # user_id = session.get('user_id')
+    # if user_id is None:
+    #     return redirect(url_for('login_view'))
+    # else:
+    choices = Menu.get_menu()
+    return render_template('main_posts.html', choices=choices)
 
 # app.py(投稿処理)
-    # request.form.get()でID＋回数(秒数)＋セット数取得
-    # トランザクション使用してDB登録
+    # request.form.getlist()でID＋回数(秒数)＋セット数取得
 @app.route('/post', methods=['POST'])
 def create_post():
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login_view'))
-    content = request.form.get('cotent', '').strip()
-
+    content = request.form.get('content', '').strip()
+    
     # メニュー選択項目を配列として入れる
     menus = request.form.getlist('menu[]')
-    reps = request.form.getlist('reps[]')
-    sets = request.form.getist('sets[]')
+    menus_reps = request.form.getlist('rep[]')
+    menus_sets = request.form.getist('set_count[]')
 
-    # メニュー・回数・セット数を順番にDBに登録(ここ以下はmodels.pyに持っていく)
-    for i in range(len(menus)): #len関数でメニュー数分繰り返し
-        menu = request.form.get(menu[i])
-        reps = request.form.get(reps[i])
-        sets = request.form.get(sets[i])
+    Rec.record_DB(menus, menus_reps, menu_sets, menu, rep, set_count, content)
 
-        conn = db_pool.get_conn()
-        try:
-            with conn.cursor() as cur:
-                sql_1 = "INSERT INTO Posts (user_id, content) VALUES (%s, %s);"
-                cur.execute(sql_2, (user_id, content))
-
-                user_id = cursor.lastrowid
-
-                sql_2 = "INSERT INTO Post_Training (user_id, post_id, training_id, reps, set_count) VALUES (%s, %s, %s, %s, %s);"
-                cur.execute(sql_3, (user_id, post_id, training_id, reps, sets)) 
- 
-                conn.commit()
-
-        except pymysql.Error as e:
-            print(f'エラーが発生しています：{e}')
-            abort(500)
-        finally:
-            db_pool.release(conn)
+    return redirect(url_for('posts_list_view'))
 
 
 # 投稿一覧表示画面の表示(途中)
 @app.route('/posts_list', methods=['GET'])
 def posts_list_view():
-    user_id = session.get('user_id')
-    if user_id is None:
-        return redirect(url_for('login_view'))
-    else:
+    # user_id = session.get('user_id')
+    # if user_id is None:
+    #     return redirect(url_for('login_view'))
+    # else:
         posts = Post.get_all() # Postクラス・get_all()
         for post in posts:
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
-            post['user_name'] = User.get_name_by_id(post['user_id'])
+            # post['user_name'] = User.get_name_by_id(post['user_id'])
 
-        return render_template('post/posts.html', posts=posts, user_id=user_id)
+        return posts
+        # return render_template('post/posts.html', posts=posts, user_id=user_id)
         
 # 投稿詳細画面表示(途中)
 @app.route('/posts_list/<int:post_id>', methods=['GET'])
@@ -210,3 +194,6 @@ def add_reaction():
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login_view'))
+
+if __name__=='__main__':
+    app.run(host="0.0.0.0", debug=True)
