@@ -116,6 +116,7 @@ main{
     overflow-wrap: break-word;
 }
 
+/*フッターっぽいところにあるボタン用のところ*/
 .footer-menu{
     text-align: center;
 }
@@ -128,6 +129,7 @@ main{
     text-align: center;
 }
 
+/*できたスタンプ見たいなもの角度とかここで調節。文字変えたい時はhtmlの方で*/
 .dekita{
     position:absolute ;
     top:-8px;
@@ -135,4 +137,18 @@ main{
     transform: rotate(-30deg);
     color: red;
     opacity: 0.5;
+}
+
+/*パンくずリストのところ*/
+.breadcrumb{
+    font-size: 11px;
+}
+
+.breadcrumb a{
+    text-decoration: none;
+    color: #333;
+}
+
+.breadcrumb span{
+    margin: 0 4px;
 }

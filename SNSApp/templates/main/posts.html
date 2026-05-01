@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+<!--パンくずのところ-->
+{% block breadcrumb%}
+<nav class="breadcrumb">
+    <a href="/">トップ</a>
+    <span>＞</span>
+    <span>投稿一覧</span>
+</nav>
+{% endblock %}
+
 {% block title %}みんなの頑張り（仮）{% endblock %}
 
 {% block page_css %}
