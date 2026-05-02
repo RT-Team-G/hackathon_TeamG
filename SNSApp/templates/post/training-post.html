@@ -29,7 +29,7 @@
         <!-- {% for i in range(5) %} -->
           <div class="training-post-card">
             <div class="training-post-field">
-              <select class="main-select" name="menu[]">
+              <select class="main-select" name="menu[]" required>
                 <option value="" disabled selected hidden>選んでください</option>
                 {% for choice in choices %}
                 <option value="{{ choice.id }}">{{ choice.menu_name }}</option>
@@ -54,12 +54,12 @@
                 セット
               </label>
             </div>
-            <div class="training-post-field">
-              <label>
-                その他
-                <input type="text" name="other[]">
-              </label>
-            </div>
+              <div class="training-post-field is-left">
+                <label>
+                  その他
+                  <input type="text" name="other[]">
+                </label>
+              </div>
             <div class="training-post-field is-right">
               <label>
                 <select name="sec[]">
