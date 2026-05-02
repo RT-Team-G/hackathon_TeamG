@@ -1,17 +1,3 @@
-/* * {
-    outline: 1px solid blue;
-    margin: 0px;
-    padding: 0px;
-} */
-
-/* 各ブロックの背景色（確認用） */
-/* body { background-color: red } */
-/* .page-posts { background-color: #f0f8ff; }  */
-/* .page-title { background-color: #f5f5dc; }  */
-/* .page-note { background-color: #fff0f5; }  */
-/* .training-post-form { background-color: #f0fff0; } */
-.training-post-card { background-color: #fffaf0; }
-
 
 /* =========================================
 ツリー図
@@ -24,7 +10,15 @@
     │   └── .training-post-field.is-right
     ├── textarea
     └── button
+============================================
+* {
+    outline: 1px solid blue;
+    margin: 0px;
+    padding: 0px;
+}
 ========================================= */
+
+
 
 /* =========================================
    全体のレイアウトをスマホ用に
@@ -32,25 +26,21 @@
 .page-posts {
     max-width: 400px;
     margin: 0px auto;
-    padding: 0px 20px;
+    padding: 1px 20px;
 }
 
 .title-group {
     width: fit-content;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 
-
 /* =========================================
-   xx
+   ページタイトルと注釈テキスト
 ========================================= */
 .page-title {
     margin-bottom: 5px;
 }
 
-/* =========================================
-   xx
-========================================= */
 .page-note {
     display: block;
     font-size: 12px;
@@ -59,7 +49,7 @@
 }
 
 /* =========================================
-   xx
+   フォーム全体の構造
 ========================================= */
 .training-post-form {
     display: flex;
@@ -67,14 +57,19 @@
     gap: 15px;
 }
 
+/* =========================================
+   自由記述欄
+========================================= */
 .training-post-form textarea {
     width: 100%;
     min-height: 100px;
     box-sizing: border-box;
     resize: vertical;
+    padding: 5px;
 }
+
 /* =========================================
-   xx
+   トレーニング入力カード
 ========================================= */
 .training-post-card {
     padding: 20px;
@@ -85,7 +80,7 @@
 }
 
 /* =========================================
-   xx
+   セレクトボックス
 ========================================= */
 .training-post-field {
     display: flex;
@@ -95,29 +90,27 @@
     width: 100%;
 }
 
+/* トレ選択セレクトを装飾 */
 .main-select {
     background-color: #ffffff;
-    border: none;
+    border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px 15px;
-    width: 280px;
+    width: 100%;
+    max-width: 320px;
 }
 
+/* ●回●セットを右に配置 */
+.training-post-field.is-left {
+    justify-content: flex-start;
+}
 
-
+/* ●秒●セットを右に配置 */
 .training-post-field.is-right {
     justify-content: flex-end;
 }
 
+/* できたボタンを右に配置 */
 .training-post-form button {
     align-self: flex-end;
-
 }
-
-
-
-
-
-
-
-
