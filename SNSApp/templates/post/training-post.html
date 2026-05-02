@@ -20,16 +20,16 @@
   <div class="page-posts">
     <!-- メイン -->
     <main>
-      <div class="page-title">
-        <h2>今日のトレーニング</h2>
+      <div class="title-group">
+        <h2 class="page-title">今日のトレーニング</h2>
+        <small class="page-note">※複数選択可</small>
       </div>
-      <small class="page-note">※複数選択可</small>
       <form class="training-post-form" action="/post" method="POST">
         <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
-        {% for i in range(5) %}
+        <!-- {% for i in range(5) %} -->
           <div class="training-post-card">
             <div class="training-post-field">
-              <select name="menu[]">
+              <select class="main-select" name="menu[]">
                 <option value="" disabled selected hidden>選んでください</option>
                 {% for choice in choices %}
                 <option value="{{ choice.id }}">{{ choice.menu_name }}</option>
@@ -79,13 +79,11 @@
               </label>
             </div>
           </div>
-        {% endfor %}
+        <!-- {% endfor %} -->
         <div>
           <textarea placeholder="自由記述欄（感想や言い訳など・・）" name="content"></textarea>
         </div>
-        <div>
-          <button type="submit">できた</button>
-        </div>
+        <button type="submit">できた</button>
       </form>
     </main>
   </div>

@@ -1,33 +1,33 @@
-* {
+/* * {
     outline: 1px solid blue;
     margin: 0px;
     padding: 0px;
-}
+} */
 
 /* 各ブロックの背景色（確認用） */
 /* body { background-color: red } */
-.page-posts { background-color: #f0f8ff; } 
-.page-title { background-color: #f5f5dc; } 
-.page-note { background-color: #fff0f5; } 
+/* .page-posts { background-color: #f0f8ff; }  */
+/* .page-title { background-color: #f5f5dc; }  */
+/* .page-note { background-color: #fff0f5; }  */
 /* .training-post-form { background-color: #f0fff0; } */
-/* .training-post-card { background-color: #fffaf0; } */
+.training-post-card { background-color: #fffaf0; }
 
 
 /* =========================================
 ツリー図
-.page-posts (1層目)
-├── .page-title (2層目)
-├── .page-note (2層目)
-└── .training-post-form (2層目)
-    ├── .training-post-card (3層目)
-    │   ├── .training-post-field (4層目)
-    │   └── .training-post-field.is-right (4層目)
-    ├── textarea (3層目)
-    └── button (3層目)
+.page-posts
+├── .page-title
+├── .page-note
+└── .training-post-form
+    ├── .training-post-card 
+    │   ├── .training-post-field
+    │   └── .training-post-field.is-right
+    ├── textarea
+    └── button
 ========================================= */
 
 /* =========================================
-   1層目
+   全体のレイアウトをスマホ用に
 ========================================= */
 .page-posts {
     max-width: 400px;
@@ -35,24 +35,89 @@
     padding: 0px 20px;
 }
 
+.title-group {
+    width: fit-content;
+    margin: 20px auto;
+}
+
+
 /* =========================================
-   2層目
+   xx
 ========================================= */
 .page-title {
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: px;
+    margin-bottom: 5px;
 }
 
 /* =========================================
-   2層目
+   xx
 ========================================= */
 .page-note {
     display: block;
-    text-align: center;
     font-size: 12px;
     color: #666666;
     font-weight: normal;
+}
+
+/* =========================================
+   xx
+========================================= */
+.training-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.training-post-form textarea {
+    width: 100%;
+    min-height: 100px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+/* =========================================
+   xx
+========================================= */
+.training-post-card {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/* =========================================
+   xx
+========================================= */
+.training-post-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.main-select {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    width: 280px;
+}
+
+
+
+.training-post-field.is-right {
+    justify-content: flex-end;
+}
+
+.training-post-form button {
+    align-self: flex-end;
 
 }
+
+
+
+
+
+
+
 
