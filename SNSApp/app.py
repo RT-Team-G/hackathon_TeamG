@@ -7,8 +7,8 @@ import uuid
 import re
 import os
 
-from select_menu import Menu, Rec
-from all_posts import Post
+from models.select_menu import Menu, Rec
+from models.all_posts import Post
 
 # 初期起動時にコネクションプールを作成し接続を確立
 db_pool = DB.init_db_pool()
@@ -27,10 +27,10 @@ csrf = CSRFProtect(app)
 @app.route('/', methods=['GET'])
 def index():
     return "ok"
-    # user_id = session.get('user_id')
-    # if user_id is None:
-    #     return redirect(url_for('login_view'))
-    # return redirect(url_for('post_view'))
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('login_view'))
+    return redirect(url_for('post_view'))
 
 # サインアップページの表示
 @app.route('/signup', methods=['GET'])
@@ -108,11 +108,11 @@ def login_process():
                 return redirect(url_for('post_view'))
     return redirect(url_for('login_view'))
 
-# ログアウト
-# @app.route('/logout')
-# def logout():
-#     session.clear()
-#     return redirect(url_for('login_view'))
+ログアウト
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login_view'))
 
 # トレーニングメニュー選択・投稿作成画面表示
 @app.route('/post', methods=['GET'])
@@ -122,7 +122,7 @@ def post_view():
     #     return redirect(url_for('login_view'))
     # else:
     choices = Menu.get_menu()
-    return render_template('main_posts.html', choices=choices)
+    return render_template('post/training_post.html', choices=choices)
 
 # app.py(投稿処理)
     # request.form.getlist()でID＋回数(秒数)＋セット数取得
@@ -146,17 +146,16 @@ def create_post():
 # 投稿一覧表示画面の表示(途中)
 @app.route('/posts_list', methods=['GET'])
 def posts_list_view():
-    # user_id = session.get('user_id')
-    # if user_id is None:
-    #     return redirect(url_for('login_view'))
-    # else:
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('login_view'))
+    else:
         posts = Post.get_all() # Postクラス・get_all()
         for post in posts:
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
-            # post['user_name'] = User.get_name_by_id(post['user_id'])
+            post['user_name'] = User.get_name_by_id(post['user_id'])
 
-        return posts
-        # return render_template('post/posts.html', posts=posts, user_id=user_id)
+        return render_template('main/posts.html', posts=posts, user_id=user_id)
         
 # 投稿詳細画面表示(途中)
 @app.route('/posts_list/<int:post_id>', methods=['GET'])

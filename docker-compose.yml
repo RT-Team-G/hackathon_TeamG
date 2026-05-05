@@ -59,9 +59,6 @@ services:
       db:
         # dbのヘルスチェックが終わってからappを起動させる
         condition: service_healthy
-    # ログを即時表示するために追加
-    environment:
-      - PYTHONUNBUFFERED=1
     # .envファイルから環境変数を読み込む
     env_file:
       - .env
