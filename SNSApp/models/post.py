@@ -44,6 +44,8 @@ class Post:
                 cur.execute(sql, (user_id, content))
                 #コミットする
                 conn.commit()
+                #生成されたIDを返すAUTO
+            return cur.lastrowid
         except pymysql.Error as e:
             print(f"エラーが発生しています:{e}")
             abort(500)
