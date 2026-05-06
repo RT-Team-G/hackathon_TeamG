@@ -52,7 +52,6 @@ class User:
         except pymysql.Error as e:
             print(f'エラーが発生しています:{e}')
             abort(500)
-        
         finally:
             #成功、失敗しても終了
             db_pool.release(conn)
@@ -64,7 +63,7 @@ class User:
         conn = db_pool.get_conn()
         try:
             #SQLを実行するカーソル
-            with conn.corsor() as cur:
+            with conn.cursor() as cur:
                 #SQL文
                 sql = "SELECT * FROM Users WHERE id =%s;"
                 #実行
