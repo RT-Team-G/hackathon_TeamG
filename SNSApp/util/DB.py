@@ -1,6 +1,7 @@
 import os #パスワードやポート番号を引っ張る
 import pymysql 
-from pymysqlpool import Pool
+from pymysqlpool.pool import Pool
+#↑pymysqlpoolに、.poolを加えた（ゆかポジ）
 
 class DB:
     @classmethod
