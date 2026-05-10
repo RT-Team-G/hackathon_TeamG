@@ -3,7 +3,8 @@
 <!--このファイルは全ぺーじ共通のレイアウトが書かれてます。-->
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}トレシェア{% endblock %}
+    {# <title>の範囲の修正とendblockと%の間のスペースの追加 もず #}
+    <title>{% block title %}トレシェア{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {# cssのファイルを読み込む↓ #}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css')}}">
@@ -19,14 +20,17 @@
      {% include 'common/header.html' %}
     {#  ↓パンくずのブロック作った #}
      {% block breadcrumb %}
-     {% endblock%}
+     {# endblockと%の間のスペースを追加 もず #}
+     {% endblock %}
     </header>
 
      {# 今度はここにcontentが入ることがある #}
-     {% block content%}{% endblock %}
+     {# endblockと%の間のスペースを追加 もず #}
+     {% block content %}{% endblock %}
 
      {# 最後にフッターが入ることがある #}
-     {% include 'common/footer.html '%}
+     {# e'common/footer.html '→'common/footer.html'に修正 もず #}
+     {% include 'common/footer.html' %}
 
 </body>
 

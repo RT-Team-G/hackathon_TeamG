@@ -6,9 +6,12 @@ import hashlib
 import uuid
 import re
 import os
+import pymysql.cursors
 
 from models.select_menu import Menu, Rec
 from models.all_posts import Post
+from models.user import User
+# from models.comments import Comments # コメント機能実装後にインポートする
 
 # 初期起動時にコネクションプールを作成し接続を確立
 db_pool = DB.init_db_pool()
@@ -122,23 +125,26 @@ def post_view():
     #     return redirect(url_for('login_view'))
     # else:
     choices = Menu.get_menu()
-    return render_template('post/training_post.html', choices=choices)
+    return render_template('post/training-post.html', choices=choices)
 
 # app.py(投稿処理)
     # request.form.getlist()でID＋回数(秒数)＋セット数取得
 @app.route('/post', methods=['POST'])
 def create_post():
-    user_id = session.get('user_id')
-    if user_id is None:
-        return redirect(url_for('login_view'))
-    content = request.form.get('content', '').strip()
-    
-    # メニュー選択項目を配列として入れる
-    menus = request.form.getlist('menu[]')
-    menus_reps = request.form.getlist('rep[]')
-    menus_sets = request.form.getist('set_count[]')
+    # user_id = session.get('user_id')
+    # if user_id is None:
+    #     return redirect(url_for('login_view'))
+    user_id = 2 #仮ユーザーID　セッション管理実装後に変更要
 
-    Rec.record_DB(menus, menus_reps, menu_sets, menu, rep, set_count, content)
+    Rec.record_DB('content', 'menu[]', 'reps[]', 'set_count[]', user_id)
+    
+    # 以下はapp.pyに直接書いていたコード　上記のRecクラスのrecord_DBメソッドに移動させた
+    # content = request.form.get('content', '').strip()
+    
+    # # メニュー選択項目を配列として入れる
+    # menus = request.form.getlist('menu[]')
+    # menus_reps = request.form.getlist('rep[]')
+    # menus_sets = request.form.getlist('set_count[]')
 
     return redirect(url_for('posts_list_view'))
 
@@ -146,10 +152,11 @@ def create_post():
 # 投稿一覧表示画面の表示(途中)
 @app.route('/posts_list', methods=['GET'])
 def posts_list_view():
-    user_id = session.get('user_id')
-    if user_id is None:
-        return redirect(url_for('login_view'))
-    else:
+    # user_id = session.get('user_id')
+    # if user_id is None:
+    #     return redirect(url_for('login_view'))
+    # else:
+        user_id = 2 #仮ユーザーID　セッション管理実装後に変更要
         posts = Post.get_all() # Postクラス・get_all()
         for post in posts:
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')

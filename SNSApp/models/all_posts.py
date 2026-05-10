@@ -11,8 +11,8 @@ class Post:
     def get_all(cls):
         conn = db_pool.get_conn()
         try:
-            with conn.cursor() as cur:
-                sql = "SELECT t.menu_name, pt.reps, pt.set_count, pt.created_at, p.content FROM Post_Training pt LEFT OUTER JOIN Training t ON pt.training_id = t.id LEFT OUTER JOIN Posts p ON pt.post_id = p.id ORDER BY created_at DESC;"
+            with conn.cursor(pymysql.cursors.DictCursor) as cur:
+                sql = "SELECT t.menu_name, pt.reps, pt.set_count, pt.created_at, p.content, p.user_id FROM Post_Training pt LEFT OUTER JOIN Training t ON pt.training_id = t.id LEFT OUTER JOIN Posts p ON pt.post_id = p.id ORDER BY created_at DESC;"
                 cur.execute(sql)
                 posts = cur.fetchall()
             return posts

@@ -49,7 +49,8 @@
                 <div class="post-left">
                     <div class="post-user">
                         <!-- postしたユーザーの名前ここに入ります -->
-                        <span class="display-name">{{ post.user_name }}</span>
+                        <!-- 試験的にpost.user_name → posts.user_name (for文入れてないため/以下同じ) もず-->
+                        <span class="display-name">{{ posts.user_name }}</span>
                     </div>
                 </div>
 
@@ -67,7 +68,7 @@
 
                 <!-- ここは右↓ -->
                 <div class="post-right">
-                    <div class="post-time">{{ post.created_at }}</div>
+                    <div class="post-time">{{ posts.created_at }}</div>
                     <div class="good-comments">
                         <div class="good">いいね（）</div>
                         <div class="comments">コメント（）</div>
@@ -85,7 +86,7 @@
                 <div class="post-left">
                     <div class="post-user">
                         <!-- postしたユーザーの名前ここに入ります -->
-                        <span class="display-name">{{ post.user_name }}</span>
+                        <span class="display-name">{{ posts.user_name }}</span>
                     </div>
                 </div>
 
@@ -103,7 +104,7 @@
 
                 <!-- ここは右↓ -->
                 <div class="post-right">
-                    <div class="post-time">{{ post.created_at }}</div>
+                    <div class="post-time">{{ posts.created_at }}</div>
                     <div class="good-comments">
                         <div class="good">いいね（）</div>
                         <div class="comments">コメント（）</div>
@@ -120,7 +121,7 @@
                 <div class="post-left">
                     <div class="post-user">
                         <!-- postしたユーザーの名前ここに入ります -->
-                        <span class="display-name">{{ post.user_name }}</span>
+                        <span class="display-name">{{ posts.user_name }}</span>
                     </div>
                 </div>
 
@@ -138,7 +139,7 @@
 
                 <!-- ここは右↓ -->
                 <div class="post-right">
-                    <div class="post-time">{{ post.created_at }}</div>
+                    <div class="post-time">{{ posts.created_at }}</div>
                     <div class="good-comments">
                         <div class="good">いいね（）</div>
                         <div class="comments">コメント（）</div>
