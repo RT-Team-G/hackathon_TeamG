@@ -9,7 +9,7 @@ import os
 import pymysql.cursors
 
 from models.select_menu import Menu, Rec
-from models.all_posts import Post
+from models.all_posts import All_Post
 from models.user import User
 # from models.comments import Comments # コメント機能実装後にインポートする
 
@@ -157,7 +157,7 @@ def posts_list_view():
     #     return redirect(url_for('login_view'))
     # else:
         user_id = 2 #仮ユーザーID　セッション管理実装後に変更要
-        posts = Post.get_all() # Postクラス・get_all()
+        posts = All_Post.get_all() # All_Postクラス・get_all()
         for post in posts:
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
             post['user_name'] = User.get_name_by_id(post['user_id'])
@@ -185,6 +185,14 @@ def posts_list_detail_view():
     return render_template('post/post_detail.html', post=post, comments=comments, user_id=user_id)
 
 # 投稿に対するコメント処理(途中)
+@app.route('/posts_list/<int:post_id>/comments', methods=['POST'])
+def create_comment():
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('login_view'))
+    content = request.form.get('content', '').strip()
+    Comments.create(user_id, post_id, content) #Commentsクラス・create()
+    return redirect(url_for('posts_list_detail_view', post_id=post_id))
 
 # タイマー画面表示(htmlテンプレート確認要)
 @app.route('/timer', methods=['GET'])
