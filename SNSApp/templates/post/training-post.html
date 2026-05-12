@@ -18,7 +18,7 @@
       <form class="training-post-form" action="/post" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="cards-wrapper">
-          {% for i in range(5) %}
+          {% for i in range(max_cards | default(5)) %}
             <div class="training-post-card {% if loop.first %}is-visible{% endif %}">
               <div class="remove-btn-wrapper">
                 <button type="button" class="remove-btn" aria-label="削除">✕</button>
@@ -38,15 +38,15 @@
               <div class="training-post-field is-right">
                 <label>
                   <select name="reps[]">
-                    {% for j in range(30) %}
+                    {% for j in range(max_reps | default(30)) %}
                     <option value="{{ j+1 }}">{{ j+1 }}</option>
                     {% endfor %}
                   </select>
                   回
                 </label>
                 <label>
-                  <select name="sets[]">
-                    {% for k in range(5) %}
+                  <select name="set_count[]">
+                    {% for k in range(max_sets | default(5)) %}
                     <option value="{{ k+1 }}">{{ k+1 }}</option>
                     {% endfor %}
                   </select>
