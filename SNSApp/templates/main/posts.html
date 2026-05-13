@@ -40,112 +40,49 @@
 
         <div class="post-card-wrapper">
             <div class="post-card">
-                <div class="dekita">
-                    <!-- ここにできた時のスタンプのようなもの -->
+                <div class="post-main">
+                    <div class="dekita">
+                        <!-- ここにできた時のスタンプのようなもの -->
                      <p>できた！</p>
-                </div>
+                    </div>
 
-                <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
-                <div class="post-left">
-                    <div class="post-user">
-                        <!-- postしたユーザーの名前ここに入ります -->
-                        <span class="display-name">{{ post.user_name }}</span>
+                    <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
+                    <div class="post-left">
+                        <div class="post-user">
+                            <!-- postしたユーザーの名前ここに入ります -->
+                            <span class="display-name">{{ post.user_name }}</span>
+                        </div>
+                    </div>
+
+                    <!-- ここは真ん中↓ -->
+                    <div class="post-center">
+                        <!--トレーニングを選んだものがここに列挙されるように↓ -->
+                        <div class="training-list">
+                            <ul>
+                                <li>選択されたトレーニング</li>
+                                <li>選択されたトレーニング</li>
+                                <li>選択されたトレーニング</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ここは右↓ -->
+                    <div class="post-right">
+                        <div class="post-time">{{ post.created_at }}</div>
+                        <div class="good-comments">
+                            <div class="good">いいね（）</div>
+                            <div class="comments">コメント（）</div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- ここは真ん中↓ -->
-                <div class="post-center">
-                    <!--トレーニングを選んだものがここに列挙されるように↓ -->
-                    <div class="training-list">
-                        <ul>
-                            <li>選択されたトレーニング</li>
-                            <li>選択されたトレーニング</li>
-                            <li>選択されたトレーニング</li>
-                        </ul>
-                    </div>
+                <!--自由記述のところがあったらのところ-->
+                {% if post.content %}
+                <div class="post-content">
+                    {{ post.content }}
                 </div>
-
-                <!-- ここは右↓ -->
-                <div class="post-right">
-                    <div class="post-time">{{ post.created_at }}</div>
-                    <div class="good-comments">
-                        <div class="good">いいね（）</div>
-                        <div class="comments">コメント（）</div>
-                    </div>
-                </div>
-
+                {% endif %}
             </div>
-            <!--今はコピペで三つ同じものがあるけどJinja2では繰り返しを行う-->
-            <div class="post-card">
-                <div class="dekita">
-                    <!-- ここにできた時のスタンプのようなもの -->
-                </div>
 
-                <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
-                <div class="post-left">
-                    <div class="post-user">
-                        <!-- postしたユーザーの名前ここに入ります -->
-                        <span class="display-name">{{ post.user_name }}</span>
-                    </div>
-                </div>
-
-                <!--ここは真ん中↓ -->
-                <div class="post-center">
-                    <!-- トレーニングを選んだものがここに列挙されるように↓ -->
-                    <div class="training-list">
-                        <ul>
-                            <li>選択されたトレーニング</li>
-                            <li>選択されたトレーニング</li>
-                            <li>選択されたトレーニング</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- ここは右↓ -->
-                <div class="post-right">
-                    <div class="post-time">{{ post.created_at }}</div>
-                    <div class="good-comments">
-                        <div class="good">いいね（）</div>
-                        <div class="comments">コメント（）</div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="post-card">
-                <div class="dekita">
-                    <!-- ここにできた時のスタンプのようなもの -->
-                </div>
-
-                <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
-                <div class="post-left">
-                    <div class="post-user">
-                        <!-- postしたユーザーの名前ここに入ります -->
-                        <span class="display-name">{{ post.user_name }}</span>
-                    </div>
-                </div>
-
-                <!-- ここは真ん中↓ -->
-                <div class="post-center">
-                    <!-- トレーニングを選んだものがここに列挙されるように↓ -->
-                    <div class="training-list">
-                        <ul>
-                            <li>選択されたトレーニング</li>
-                            <li>選択されたトレーニング</li>
-                            <li>選択されたトレーニング</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- ここは右↓ -->
-                <div class="post-right">
-                    <div class="post-time">{{ post.created_at }}</div>
-                    <div class="good-comments">
-                        <div class="good">いいね（）</div>
-                        <div class="comments">コメント（）</div>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </main>
 <div class="footer-menu">
