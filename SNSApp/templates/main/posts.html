@@ -57,13 +57,33 @@
                     <!-- ここは真ん中↓ -->
                     <div class="post-center">
                         <!--トレーニングを選んだものがここに列挙されるように↓ -->
-                        <div class="training-list">
-                            <ul>
-                                <li>選択されたトレーニング</li>
-                                <li>選択されたトレーニング</li>
-                                <li>選択されたトレーニング</li>
-                            </ul>
-                        </div>
+                        <ul class="training-list">
+
+                            {% for training in post.training %}
+                            <li>
+                                { if training.menu_name }
+                                    {{ training.menu_name }}
+                                {% endif %}
+
+                                {% if training.reps %}
+                                    {{ training.reps }}回
+                                {% endif %}
+
+                                {% if training.sec %}
+                                    {{ training.sec }}秒
+                                {% endif %}
+
+                                {% training.set_count %}
+                                    {{ training.set_count }}セット
+                                {% endif %}
+
+                                {% if training.other %}
+                                    ({{ training.other }})
+                                {% endif%}
+
+                            </li>
+                            {% endfor %}
+                        </ul>
                     </div>
 
                     <!-- ここは右↓ -->
