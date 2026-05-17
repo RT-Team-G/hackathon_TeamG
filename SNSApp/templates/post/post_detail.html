@@ -1,7 +1,7 @@
  {% extends "base.html" %}
 
 <!--パンくずのところ-->
-{% block breadcrumb%}
+{% block breadcrumb %}
 <nav class="breadcrumb">
     <a href="/">トップ</a>
     <span>＞</span>
@@ -12,7 +12,7 @@
 {% block title %} 投稿詳細 {% endblock %}
 
 {% block content %}
-<div class="page_post_detail>">
+<div class="page_post_detail">
     <main>
         <h1>頑張り詳細</h1>
         <div class="detail-card">
@@ -37,7 +37,7 @@
 
                             {% for training in post.training %}
                             <li>
-                                { if training.menu_name }
+                                {% if training.menu_name %}
                                     {{ training.menu_name }}
                                 {% endif %}
 
@@ -49,7 +49,7 @@
                                     {{ training.sec }}秒
                                 {% endif %}
 
-                                {% training.set_count %}
+                                {% if training.set_count %}
                                     {{ training.set_count }}セット
                                 {% endif %}
 
@@ -79,8 +79,21 @@
                 {% endif %}
 
                 <!--ここから下がコメントを入力投稿したりいいねなどのリアクションをする場所-->
-                
+                <!--コメント投稿(クラスpost)-->
+                <div class="new-post">
+                    <form class="new-post-main" action="/posts/{{ post.id }}/comments" method="post">
+                        <!-- クロスサイト対策
+                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
 
+                         <textarea name="content" placeholder="コメントする"></textarea>
+
+                         <div class="post-footer">
+                            <button class="btn" type="submit">
+                                送る
+                            </button>
+                         </div>
+                    </form>
+                </div>
         </div>
 
 
