@@ -66,7 +66,7 @@
                     <div class="post-right">
                         <div class="post-time">{{ post.created_at }}</div>
                         <div class="good-comments">
-                            <div class="good">いいね（）</div>
+                            <div class="good">いいね（{{ post）</div>
                             <div class="comments">コメント（）</div>
                         </div>
                     </div>
@@ -96,7 +96,36 @@
                 </div>
         </div>
 
+        <!--いいね！-->
+        <div class="comment-section">
+            {% if comments %} <!--commentsが空っぽじゃないなら-->
+            {% for commenet in comments %}
+            <div class="comment-card">
+                <div class="comment-header">
+                    <span class="comment-user">{{ comment.user_name }}</span> <!--コメントした人のユーザ名を表示-->
+                    <span class="comment-time">{{ comment.created_at }}</span> <!--コメントが投稿された日時-->
+                </div>
 
+                <div class="comment-body">
+                    {{ comment.content }}
+                </div>
+
+                <div class="comment-action">
+                    <form action="/comments/{{ comment.id }}/like" method="post" class="comment-like-form">
+                       <!--クロスサイト対策
+                       <input type="hidden" name="csfr_token" value="{{ csfr_token() }}"> -->
+                       <button type="submit" class="comment-good-btn">
+                        <!--いいねが1件以上ならその数字を、0件なら0を表示-->
+                        いいね！ {{comment.likes_count if comment.likes_count else 0}} 
+                       </button> 
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-comments">まだコメントがありません</p>
+        {% endif %}
+        </div>
 
 
 
