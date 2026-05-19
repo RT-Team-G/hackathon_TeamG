@@ -1,94 +1,72 @@
-<!-- {% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %} トレーニング選択・投稿画面 {% endblock %}
 
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename = 'css/training-post.css') }}">
-{% endblock %} -->
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<link rel="stylesheet" href="../../static/css/base.css">
-<link rel="stylesheet" href="../../static/css/training-post.css">
-</head>
-
-<body>
+{% endblock %}
 
   {% block content %}
 
   <div class="page-posts">
     <!-- メイン -->
     <main>
-      <div class="page-title">
-        <h2>今日のトレーニング</h2>
+      <div class="title-group">
+        <h2 class="page-title">今日のトレーニング</h2>
+        <small class="page-note">※複数選択可</small>
       </div>
-      <small class="page-note">※複数選択可</small>
       <form class="training-post-form" action="/post" method="POST">
-        <!-- <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
-        {% for i in range(5) %}
-          <div class="training-post-card">
-            <div class="training-post-field">
-              <select name="menu[]">
-                <option value="" disabled selected hidden>選んでください</option>
-                {% for choice in choices %}
-                <option value="{{ choice.id }}">{{ choice.menu_name }}</option>
-                {% endfor %}
-              </select>
-            </div>
-            <div class="training-post-field is-right">
-              <label>
-                <select name="reps[]">
-                  {% for j in range(30) %}
-                  <option value="{{ j+1 }}">{{ j+1 }}</option>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="cards-wrapper">
+          {% for i in range(max_cards | default(5)) %}
+            <div class="training-post-card {% if loop.first %}is-visible{% endif %}">
+              <div class="remove-btn-wrapper">
+                <button type="button" class="remove-btn" aria-label="削除">✕</button>
+              </div>
+              <div class="training-post-field"> 
+                <select class="main-select" name="menu[]" required>
+                  <option value="" disabled selected hidden>選んでください</option>
+                  {% for choice in choices %}
+                  <option value="{{ choice.id }}">{{ choice.menu_name }}</option>
                   {% endfor %}
+                  <option value="other">その他</option> <!-- 仮置き -->
                 </select>
-                回
-              </label>
-              <label>
-                <select name="sets[]">
-                  {% for k in range(5) %}
-                  <option value="{{ k+1 }}">{{ k+1 }}</option>
-                  {% endfor %}
-                </select>
-                セット
-              </label>
+              </div>
+              <div class="training-post-field other-input-wrapper">
+                <input type="text" name="other[]" placeholder="トレーニング名を入力">
+              </div>
+              <div class="training-post-field is-right">
+                <label>
+                  <select name="reps[]">
+                    {% for j in range(max_reps | default(30)) %}
+                    <option value="{{ j+1 }}">{{ j+1 }}</option>
+                    {% endfor %}
+                  </select>
+                  回
+                </label>
+                <label>
+                  <select name="set_count[]">
+                    {% for k in range(max_sets | default(5)) %}
+                    <option value="{{ k+1 }}">{{ k+1 }}</option>
+                    {% endfor %}
+                  </select>
+                  セット
+                </label>
+              </div>
             </div>
-            <div class="training-post-field">
-              <label>
-                その他
-                <input type="text" name="other[]">
-              </label>
-            </div>
-            <div class="training-post-field is-right">
-              <label>
-                <select name="sec[]">
-                  {% for j in range(30) %}
-                  <option value="{{ j+1 }}">{{ j+1 }}</option>
-                  {% endfor %}
-                </select>
-                秒
-              </label>
-              <label>
-                <select name="sec_sets[]">
-                  {% for k in range(5) %}
-                  <option value="{{ k+1 }}">{{ k+1 }}</option>
-                  {% endfor %}
-                </select>
-                セット
-              </label>
-            </div>
+            {% endfor %}
           </div>
-        {% endfor %}
+          <div class="add-btn-wrapper">
+            <button type="button" class="add-btn">項目を追加</button>
+          </div>
         <div>
           <textarea placeholder="自由記述欄（感想や言い訳など・・）" name="content"></textarea>
         </div>
-        <div>
-          <button type="submit">できた</button>
-        </div>
+        <button type="submit" class="post-btn">できた</button>
       </form>
     </main>
   </div>
   {% endblock %}
-
-</body>
+  {% block scripts %}
+    <script src="{{ url_for('static', filename='js/training-post.js') }}" defer></script>
+  {% endblock %}

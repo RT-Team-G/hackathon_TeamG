@@ -32,8 +32,8 @@ services:
       interval: 10s
       # タイムアウト時間は10秒
       timeout: 10s
-      # リトライ回数は3回
-      retries: 3
+      # リトライ回数は5回
+      retries: 5
       # ヘルスチェックが失敗しても無視する時間は30秒
       start_period: 30s
 

@@ -2,20 +2,60 @@
 
 {% block title %}新規登録{% endblock %}
 
-{% comment %} この下からこのページ独自の中身を書くところ {% endcomment %}
+{#この下からこのページ独自の中身を書くところ #}
 {% block content %}
+<main class="auth-main"> <!-- 画面全体の中央寄せにする -->
+    <div class="auth-wrapper"> 
+        <!-- サンプルではカード型ありますが、ログインに合わせます。
+        <div class="card"> 
+            <div class="card-header"> -->
+                <h2 class="auth-title">新規登録</h2>
+                <!--不要なら消します-->
+                <p class="card-subtitle">ユーザー情報を入力してください</p>
 
-{% comment %} ここヘッダーのメイン画像的な場所のことを書いてます。共通にしようかと思ったけどauthだけ違うから分けた {% endcomment %}
+                <!-- Python側のflashメッセージを表示する-->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+                <!--ここまでエラー表示-->
+        <!--</div> -->
+            <!-- POSTメゾットでsignup_processに飛ばす-->
+            <form class="auth-form" method="post">
+             <!--  セキュリティ対策(クロスサイト・リクエスト・フォージェリ―)
+               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
+               <div class="">
+                <label>ユーザー名</label>
+                <input type="text" placeholder="ユーザ名" name="name" /> 
+               </div>
 
-<div class="auth-topgazou">
-    
-</div>
+               <div class="">
+                <label>メールアドレス</label>
+                <input type="email" placeholder="メールアドレス" name="email" />
+               </div>
 
-<main class="auth-main">
-    <dib class="auth-wrapper">
+               <div class="">
+                <label>パスワード</label>
+                <input type="password" placeholder="パスワード" name="password" />
+               </div>
 
-
-
+               <div class="auth-button">
+                <!--これを押すとsignup_processが動き出す-->
+                <button class="auth-button" type="submit">登録</button>
+                <!--ログインへ間違えて入ってしまったら用-->
+                <a class="swith-auth" href="{{ url_for('login_view') }}">
+                    ログイン画面に戻る
+                </a>
+               </div>
+            </form>
+   <!-- </div> -->
     </div>
 </main>
 {% endblock %}

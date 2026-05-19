@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 <!--パンくずのところ-->
-{% block breadcrumb%}
+{% block breadcrumb %}
 <nav class="breadcrumb">
     <a href="/">トップ</a>
     <span>＞</span>
@@ -12,7 +12,7 @@
 {% block title %}みんなの頑張り（仮）{% endblock %}
 
 {% block page_css %}
-{% comment %} もしこのページだけのcssファイルを作った場合ここでlink relさせる {% endcomment %}
+{# もしこのページだけのcssファイルを作った場合ここでlink relさせる #}
 {% endblock %}
 
 
@@ -30,7 +30,13 @@
         <!-- ここにパンくずリストを作るかどうか -->
         </div>
 
+        {#投稿があるのならの意味↓#}
+        {% if posts and posts|length > 0 %}
+
         <div class="post-card-wrapper">
+
+            {#↓pythonではFor post in postsのところをもらうテンプレ#}
+            {% for post in posts %}
             <div class="post-card">
                 <div class="post-main">
                     <div class="dekita">
@@ -96,6 +102,11 @@
             </div>
 
         </div>
+        {% else %}
+        <div class="empty">
+            <p>投稿がありません</p>
+        </div>
+        {% endif %}
     </main>
 <div class="footer-menu">
     <a href="" class="footer-btn">トップ</a>

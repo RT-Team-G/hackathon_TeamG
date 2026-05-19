@@ -1,58 +1,219 @@
-* {
+/* =======================================
+ツリー図
+.page-posts
+├── .title-group
+│   ├── .page-title
+│   └── .page-note
+└── .training-post-form
+├── .cards-wrapper
+│   └── .training-post-card (is-visible / animation)
+│       ├── .remove-btn-wrapper
+│       ├── .training-post-field (main-select)
+│       ├── .other-input-wrapper (JS control)
+│       └── .training-post-field.is-right (reps/sets)
+├── .add-btn-wrapper
+│   └── .add-btn (disabled)
+├── textarea
+└── .post-btn (disabled)
+========================================== */
+
+/* * {
     outline: 1px solid blue;
     margin: 0px;
     padding: 0px;
-}
-
-/* 各ブロックの背景色（確認用） */
-/* body { background-color: red } */
-.page-posts { background-color: #f0f8ff; } 
-.page-title { background-color: #f5f5dc; } 
-.page-note { background-color: #fff0f5; } 
-/* .training-post-form { background-color: #f0fff0; } */
-/* .training-post-card { background-color: #fffaf0; } */
+} */
 
 
-/* =========================================
-ツリー図
-.page-posts (1層目)
-├── .page-title (2層目)
-├── .page-note (2層目)
-└── .training-post-form (2層目)
-    ├── .training-post-card (3層目)
-    │   ├── .training-post-field (4層目)
-    │   └── .training-post-field.is-right (4層目)
-    ├── textarea (3層目)
-    └── button (3層目)
-========================================= */
-
-/* =========================================
-   1層目
+/* ======================================
+   1. ベース＆レイアウト
 ========================================= */
 .page-posts {
     max-width: 400px;
     margin: 0px auto;
-    padding: 0px 20px;
+    padding: 1px 20px;
 }
 
-/* =========================================
-   2層目
+.title-group {
+    width: fit-content;
+    margin: 10px auto;
+}
+
+/* ======================================
+   2. ページタイトルと注釈テキスト
 ========================================= */
 .page-title {
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: px;
+    margin-bottom: 5px;
 }
 
-/* =========================================
-   2層目
-========================================= */
 .page-note {
     display: block;
-    text-align: center;
     font-size: 12px;
     color: #666666;
     font-weight: normal;
-
 }
 
+/* ======================================
+   3. フォーム共通要素
+========================================= */
+.training-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.training-post-form textarea,
+.main-select,
+.is-right select,
+.other-input-wrapper input {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+}
+
+/* 個別調整 */
+.training-post-form textarea {
+    min-height: 100px;
+    resize: vertical;
+    background: #fdfcff;
+    border: 1px solid #e6e0f8;
+    border-radius: 12px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.training-post-form textarea::placeholder {
+    color: #a09eb0;
+}
+
+.is-right select {
+    width: 60px;
+}
+
+/* ======================================
+   4. カード＆アニメーション
+========================================= */
+/* カード全体のスタイル、一旦むらさきにしてます? */
+.training-post-card {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    padding: 35px 15px 15px 15px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-top: 50px;
+    background: #fdfcff;
+    border: 1px solid #e6e0f8;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(138, 92, 246, 0.08);
+}
+
+/* 表示に関するちょっとしたアニメーションです */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* JSで付与する際のクラス&アニメーション */
+.training-post-card.is-visible {
+    display: flex;
+    animation: fadeInUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* その他の入力欄を非表示に */
+.training-post-field.other-input-wrapper {
+    display: none;
+    margin-top: 10px;
+}
+
+/* ======================================
+セレクトボックス
+========================================= */
+.training-post-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+/* ======================================
+5. ボタン類
+========================================= */
+button {
+    border: none;
+    background: transparent;
+}
+
+/* 削除（✕）ボタン */
+.remove-btn-wrapper {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.remove-btn {
+    font-size: 20px;
+    color: #a09eb0;
+    padding: 5px 10px ;
+}
+
+/* 追加ボタン */
+.add-btn-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.add-btn {
+    width: 100%;
+    background-color: #ffffff;
+    color: #9b72e5;
+    border: 2px dashed #9b72e5;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 6px 15px rgba(138, 92, 246, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-btn::before {
+    content: "＋";
+    font-size: 20px;
+}
+
+.training-post-field.is-right { /* ここもっかい確認しなければ */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.post-btn {
+    align-self: flex-end;
+    background-color: #7c4dff;
+    color: #ffffff;
+    padding: 15px 40px;
+    border-radius: 30px; 
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 4px 12px rgba(124, 77, 255, 0.4);
+}
+
+/* ボタンの非表示 */
+.add-btn:disabled,
+.remove-btn:disabled {
+    color: #ccc;
+    opacity: 0.5;
+}
