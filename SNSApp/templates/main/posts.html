@@ -92,6 +92,12 @@
                 <div class="post-content">
                     {{ post.content }}
                 </div>
+                <div class="post-footer">
+                    <div class="post-actions">
+                        <!-- 詳細・コメント画面へ（GET /posts/{post_id}） -->
+                        <a class="post-btn " href="/posts_list/{{ post.id }}">詳細</a>
+                    </div>
+                <div>
                 {% endif %}
             </div>
 

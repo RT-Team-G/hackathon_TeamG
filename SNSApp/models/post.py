@@ -15,7 +15,14 @@ class Post:
             #カーソル作成
             with conn.cursor() as cur:
                 #SQL文
-                sql = "SELECT t.menu_name, pt.reps, pt.set_count, pt.created_at, p.content FROM Post_Training pt LEFT OUTER JOIN Training t ON pt.training_id = t.id LEFT OUTER JOIN Posts p ON pt.post_id = p.id WHERE pt.post_id = %s;"
+                sql = """
+                        SELECT pt.post_id AS id, JSON_ARRAYAGG(t.menu_name) AS menu_name, JSON_ARRAYAGG(pt.reps) AS reps, JSON_ARRAYAGG(pt.set_count) AS set_count, MAX(pt.created_at) AS created_at, ANY_VALUE(p.content) AS content, ANY_VALUE(p.user_id) AS user_id 
+                        FROM Post_Training pt LEFT OUTER JOIN Training t ON pt.training_id = t.id 
+                        LEFT OUTER JOIN Posts p ON pt.post_id = p.id 
+                        WHERE p.id = %s 
+                        GROUP BY pt.post_id 
+                        ORDER BY created_at DESC;
+                """
                 #実行
                 cur.execute(sql, (post_id,))
                 post = cur.fetchone()

@@ -52,6 +52,7 @@ top-image{
     display: flex;
     position: relative;
     align-items: flex-start;
+    flex-direction: column;
     gap: 12px;
     padding: 12px;
     border: 1px solid #333;
@@ -60,6 +61,11 @@ top-image{
     margin-bottom: 32px;
     width: 100%;
     max-width: 354px;
+}
+
+.post-main{
+    display: flex;
+    gap: 12px;
 }
 
 .post-left{
@@ -120,6 +126,12 @@ top-image{
     overflow-wrap: break-word;
 }
 
+.post-content{
+    margin-top:8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
 /*フッターっぽいところにあるボタン用のところ*/
 .footer-menu{
     text-align: center;
@@ -155,4 +167,91 @@ top-image{
 
 .breadcrumb span{
     margin: 0 4px;
+}
+
+/*authのcss*/
+
+.auth-wrapper{
+    display: flex;
+    align-items: center;
+}
+
+.auth-title, .auth-subtitle{
+    display: flex;
+
+}
+
+.auth-title{
+    margin: 0 0 6px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+
+.auth-form>div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-form label {
+  font-size: 14px;
+  color: #121418;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+  padding: 14px 16px;
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="password"]:focus {
+  border-color: rgba(37, 99, 235, 0.9);
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(191, 219, 254, 0.9);
+}
+
+.auth-button {
+  border: none;
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 6px 18px rgba(134, 135, 137, 0.25);
+  width: 100%;
+}
+
+
+.auth-button:hover {
+  background: #e9dded;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(207, 209, 212, 0.3);
+}
+
+.auth-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.18);
+}
+
+
+/* フラッシュメッセージ */
+.flash {
+  list-style: none;
+  padding: 10px 12px;
+  margin: 0 0 3px;
+  border-radius: 12px;
+  background: rgba(254, 226, 226, 0.9);
+  border: 1px solid rgba(248, 113, 113, 0.8);
+  font-size: 14px;
 }

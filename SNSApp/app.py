@@ -11,6 +11,7 @@ import json
 
 from models.select_menu import Menu, Rec
 from models.all_posts import All_Post
+from models.post import Post
 from models.user import User
 from models.comment import Comments # コメント機能実装後にインポートする
 from models.reactions import Reactions 
@@ -34,13 +35,13 @@ def index():
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login_view'))
-    return redirect(url_for('post_view'))
+    return redirect(url_for('posts_list_view'))
 
 # サインアップページの表示
 @app.route('/signup', methods=['GET'])
 def signup_view():
     if session.get('user_id') is not None: # セッション残ってない(Noneではない)場合
-        return redirect(url_for('post_view'))
+        return redirect(url_for('posts_list_view'))
     return render_template('auth/signup.html')
 
 # サインアップ処理
@@ -82,13 +83,13 @@ def signup_process():
     session['user_id'] = user_id
 
     # リダイレクト
-    return redirect(url_for('post_view'))
+    return redirect(url_for('posts_list_view'))
 
 # ログインページの表示
 @app.route('/login', methods=['GET'])
 def login_view():
     if session.get('user_id') is not None:
-        return redirect(url_for('post_view'))
+        return redirect(url_for('posts_list_view'))
     return render_template('auth/login.html')
 
 # ログイン処理
@@ -163,14 +164,14 @@ def posts_list_view():
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
             post['user_name'] = User.get_name_by_id(post['user_id'])
             # コメント数を取得
-            post['comments_count'] = Comments.count_by_comment(post['post_id'])
+            post['comments_count'] = Comments.count_by_comment(post['id'])
             # post['reaction'] = Reactions.count_reaction(post['reaction'])
 
         return render_template('main/posts.html', posts=posts, post=post, user_id=user_id)
         
 # 投稿詳細画面表示(途中)
 @app.route('/posts_list/<int:post_id>', methods=['GET'])
-def posts_list_detail_view():
+def posts_list_detail_view(post_id):
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login_view'))
@@ -178,9 +179,18 @@ def posts_list_detail_view():
     post = Post.find_by_id(post_id) #Postクラス・find_by_id()
     if post is None:
         abort(404) #リクエストされた投稿が見つからない場合404エラーを出す
+
+    if isinstance(post['menu_name'], str):
+        post['menu_name'] = json.loads(post['menu_name'])
+    if isinstance(post['reps'], str):
+        post['reps'] = json.loads(post['reps'])
+    # if isinstance(post['sec'], str):
+    #     post['sec'] = json.loads(post['sec'])
+    if isinstance(post['set_count'], str):
+        post['set_count'] = json.loads(post['set_count'])
     post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
     post['user_name'] = User.get_name_by_id(post['user_id'])
-    post['reaction'] = Reactions.count_reaction(post['reaction'])
+    # post['reaction'] = Reactions.count_reaction(post['reaction'])
 
     # コメント
     comments = Comments.get_by_post_id(post_id) #commentsクラス・get_by_post_id()
@@ -189,7 +199,7 @@ def posts_list_detail_view():
         comment['user_name'] = User.get_name_by_id(comment['user_id'])
 
     # コメント数を取得
-    comments.count_by_comment(post_id)
+    post['comments_count'] = Comments.count_by_comment(post['id'])
 
     # リアクション数を取得
 
@@ -198,11 +208,13 @@ def posts_list_detail_view():
 
 # 投稿に対するコメント処理(途中)
 @app.route('/posts_list/<int:post_id>/comments', methods=['POST'])
-def create_comment():
+def create_comment(post_id):
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login_view'))
     content = request.form.get('content', '').strip()
+    if content == '':
+        flash('コメント内容が空です','error')
     Comments.create(user_id, post_id, content) #Commentsクラス・create()
     return redirect(url_for('posts_list_detail_view', post_id=post_id))
 
@@ -216,7 +228,7 @@ def timer_view():
 
 # リアクション登録(途中)
 @app.route('/posts_list/<int:post_id>/reaction', methods=['POST'])
-def add_reaction():
+def add_reaction(post_id):
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login_view'))

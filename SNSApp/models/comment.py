@@ -34,7 +34,7 @@ class Comments:
             #カーソル作成
             with conn.cursor() as cur:
                 #SQL文
-                sql = "SELECT * FROM comments WHERE post_id=%s ORDER BY created_at DESC;"
+                sql = "SELECT * FROM Comments WHERE post_id=%s ORDER BY created_at DESC;"
                 #実行
                 cur.execute(sql, (post_id,))
                 #全件取得
@@ -54,7 +54,7 @@ class Comments:
             # カーソル作成
             with conn.cursor() as cur:
                 # SQL文
-                sql = "SELECT COUNT(*) FROM Comments WHERE post_id=%s;"
+                sql = "SELECT COUNT(*) AS cnt FROM Comments WHERE post_id=%s;"
                 # executeでsqlクエリを実行
                 cur.execute(sql, (post_id,))
                 # コメント数を取得
