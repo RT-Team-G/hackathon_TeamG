@@ -60,7 +60,7 @@ class Post:
             #カーソル作成
             with conn.cursor() as cur:
                 #SQL文
-                sql = "SELECT * FROM Posts WHERE id = %s;"
+                sql = "SELECT t.menu_name, pt.reps, pt.set_count, pt.created_at, p.content FROM Post_Training pt LEFT OUTER JOIN Training t ON pt.training_id = t.id LEFT OUTER JOIN Posts p ON pt.post_id = p.id ORDER BY created_at DESC;"
                 #実行
                 cur.execute(sql, (post_id,))
                 post = cur.fetchone()

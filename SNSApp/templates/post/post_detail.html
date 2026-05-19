@@ -1,21 +1,139 @@
-<!-- {% extends "base.html" %}
- <!--パンくずのところ-->
+ {% extends "base.html" %}
+
+<!--パンくずのところ-->
 {% block breadcrumb %}
 <nav class="breadcrumb">
     <a href="/">トップ</a>
     <span>＞</span>
-    <span>投稿一覧</span>
+    <span>投稿詳細</span>
 </nav>
 {% endblock %}
 
 {% block title %} 投稿詳細 {% endblock %}
 
-{% block content %}.
-{# Jinja2を発揮させる時ここのコメントアウトはとってもいい#}
+{% block content %}
+<div class="page_post_detail">
+    <main>
+        <h1>頑張り詳細</h1>
+        <div class="detail-card">
+             <div class="post-main">
+                    <div class="dekita">
+                        <!-- ここにできた時のスタンプのようなもの -->
+                     <p>できた！</p>
+                    </div>
 
-<h1>頑張り詳細</h1>
+                    <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
+                    <div class="post-left">
+                        <div class="post-user">
+                            <!-- postしたユーザーの名前ここに入ります -->
+                            <span class="display-name">{{ post.user_name }}</span>
+                        </div>
+                    </div>
+
+                    <!-- ここは真ん中↓ -->
+                    <div class="post-center">
+                        <!--トレーニングを選んだものがここに列挙されるように↓ -->
+                        <ul class="training-list">
+
+                            {% for training in post.training %}
+                            <li>
+                                {% if training.menu_name %}
+                                    {{ training.menu_name }}
+                                {% endif %}
+
+                                {% if training.reps %}
+                                    {{ training.reps }}回
+                                {% endif %}
+
+                                {% if training.sec %}
+                                    {{ training.sec }}秒
+                                {% endif %}
+
+                                {% if training.set_count %}
+                                    {{ training.set_count }}セット
+                                {% endif %}
+
+                                {% if training.other %}
+                                    ({{ training.other }})
+                                {% endif%}
+
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <!-- ここは右↓ -->
+                    <div class="post-right">
+                        <div class="post-time">{{ post.created_at }}</div>
+                        <div class="good-comments">
+                            <div class="good">いいね（{{ post）</div>
+                            <div class="comments">コメント（）</div>
+                        </div>
+                    </div>
+                </div>
+                <!--自由記述のところがあったらのところ-->
+                {% if post.content %}
+                <div class="post-content">
+                    {{ post.content }}
+                </div>
+                {% endif %}
+
+                <!--ここから下がコメントを入力投稿したりいいねなどのリアクションをする場所-->
+                <!--コメント投稿(クラスpost)-->
+                <div class="new-post">
+                    <form class="new-post-main" action="/posts/{{ post.id }}/comments" method="post">
+                        <!-- クロスサイト対策
+                         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> -->
+
+                         <textarea name="content" placeholder="コメントする"></textarea>
+
+                         <div class="post-footer">
+                            <button class="btn" type="submit">
+                                送る
+                            </button>
+                         </div>
+                    </form>
+                </div>
+        </div>
+
+        <!--いいね！-->
+        <div class="comment-section">
+            {% if comments %} <!--commentsが空っぽじゃないなら-->
+            {% for commenet in comments %}
+            <div class="comment-card">
+                <div class="comment-header">
+                    <span class="comment-user">{{ comment.user_name }}</span> <!--コメントした人のユーザ名を表示-->
+                    <span class="comment-time">{{ comment.created_at }}</span> <!--コメントが投稿された日時-->
+                </div>
+
+                <div class="comment-body">
+                    {{ comment.content }}
+                </div>
+
+                <div class="comment-action">
+                    <form action="/comments/{{ comment.id }}/like" method="post" class="comment-like-form">
+                       <!--クロスサイト対策
+                       <input type="hidden" name="csfr_token" value="{{ csfr_token() }}"> -->
+                       <button type="submit" class="comment-good-btn">
+                        <!--いいねが1件以上ならその数字を、0件なら0を表示-->
+                        いいね！ {{comment.likes_count if comment.likes_count else 0}} 
+                       </button> 
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-comments">まだコメントがありません</p>
+        {% endif %}
+        </div>
 
 
+
+    </main>
+    <div class="footer-menu">
+        <a href="" class="footer-btn">トップ</a>
+    </div>
+</div>
 
 
 {% endblock %}
