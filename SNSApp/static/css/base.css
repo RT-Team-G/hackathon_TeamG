@@ -52,6 +52,7 @@ top-image{
     display: flex;
     position: relative;
     align-items: flex-start;
+    flex-direction: column;
     gap: 12px;
     padding: 12px;
     border: 1px solid #333;
@@ -60,6 +61,11 @@ top-image{
     margin-bottom: 32px;
     width: 100%;
     max-width: 354px;
+}
+
+.post-main{
+    display: flex;
+    gap: 12px;
 }
 
 .post-left{
@@ -118,6 +124,12 @@ top-image{
     max-width: 30%;
     text-align: right;
     overflow-wrap: break-word;
+}
+
+.post-content{
+    margin-top:8px;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 /*フッターっぽいところにあるボタン用のところ*/

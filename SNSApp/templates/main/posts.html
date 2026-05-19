@@ -5,7 +5,7 @@
 <nav class="breadcrumb">
     <a href="/">トップ</a>
     <span>＞</span>
-    <span>投稿一覧</span>
+
 </nav>
 {% endblock %}
 
@@ -16,18 +16,10 @@
 {% endblock %}
 
 
-<!--この下のheadはテスト用のもの。Jinja2を使う時には消すかコメントアウトする-->
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<link rel="stylesheet" href="../../static/css/base.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
 
 {% block content %}
 
-<!--このmainもテスト用なので消します-->
-<main>
+
 <div class="page-posts">
     <main>
         <div  class="page-title">
@@ -46,42 +38,68 @@
             {#↓pythonではFor post in postsのところをもらうテンプレ#}
             {% for post in posts %}
             <div class="post-card">
-                <div class="dekita">
-                    <!-- ここにできた時のスタンプのようなもの -->
+                <div class="post-main">
+                    <div class="dekita">
+                        <!-- ここにできた時のスタンプのようなもの -->
                      <p>できた！</p>
-                </div>
-
-                <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
-                <div class="post-left">
-                    <div class="post-user">
-                        <!-- postしたユーザーの名前ここに入ります -->
-                        <span class="display-name">{{ post.user_name }}</span>
                     </div>
-                </div>
 
-                <!-- ここは真ん中↓ -->
-                <div class="post-center">
-                    <!--トレーニングを選んだものがここに列挙されるように↓ -->
-                    <div class="training-list">
-                        <ul>
-                            <li>選択されたトレーニング</li>
-                            <li>選択されたトレーニング</li>
-                            <li>選択されたトレーニング</li>
+                    <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
+                    <div class="post-left">
+                        <div class="post-user">
+                            <!-- postしたユーザーの名前ここに入ります -->
+                            <span class="display-name">{{ post.user_name }}</span>
+                        </div>
+                    </div>
+
+                    <!-- ここは真ん中↓ -->
+                    <div class="post-center">
+                        <!--トレーニングを選んだものがここに列挙されるように↓ -->
+                        <ul class="training-list">
+
+                            {% for training in post.training %}
+                            <li>
+                                { if training.menu_name }
+                                    {{ training.menu_name }}
+                                {% endif %}
+
+                                {% if training.reps %}
+                                    {{ training.reps }}回
+                                {% endif %}
+
+                                {% if training.sec %}
+                                    {{ training.sec }}秒
+                                {% endif %}
+
+                                {% training.set_count %}
+                                    {{ training.set_count }}セット
+                                {% endif %}
+
+                                {% if training.other %}
+                                    ({{ training.other }})
+                                {% endif%}
+
+                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
-                </div>
 
-                <!-- ここは右↓ -->
-                <div class="post-right">
-                    <div class="post-time">{{ post.created_at }}</div>
-                    <div class="good-comments">
-                        <div class="good">いいね（）</div>
-                        <div class="comments">コメント（）</div>
+                    <!-- ここは右↓ -->
+                    <div class="post-right">
+                        <div class="post-time">{{ post.created_at }}</div>
+                        <div class="good-comments">
+                            <div class="good">いいね（）</div>
+                            <div class="comments">コメント（）</div>
+                        </div>
                     </div>
                 </div>
-
+                <!--自由記述のところがあったらのところ-->
+                {% if post.content %}
+                <div class="post-content">
+                    {{ post.content }}
+                </div>
+                {% endif %}
             </div>
-            {%endfor%}
 
         </div>
         {% else %}
@@ -96,8 +114,6 @@
 </div>
 </div>
 
-
-</main>
 
 
 {% endblock %}
