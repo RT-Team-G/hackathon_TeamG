@@ -140,8 +140,8 @@ CREATE TABLE
 
 -- テスト用 Users
 INSERT INTO Users (name, email, password) VALUES 
-('佐藤一郎', 'sato@example', '12345'), 
-('鈴木次郎', 'suzuki@example', '98765');
+  ('山田太郎', 'taro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244'),
+  ('鈴木二郎', 'jiro@example.com', '937e8d5fbb48bd4949536cd65b8d35c426b80d2f830c5c308e2cdec422ae2244');
 
 -- Posts 佐藤user1, 鈴木user2
 INSERT INTO Posts (user_id, content) VALUES 
