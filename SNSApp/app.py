@@ -136,7 +136,6 @@ def create_post():
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login_view'))
-    # user_id = 2 #仮ユーザーID　セッション管理実装後に変更要
 
     Rec.record_DB('content', 'menu[]', 'reps[]', 'set_count[]', user_id)
 
@@ -150,7 +149,6 @@ def posts_list_view():
     if user_id is None:
         return redirect(url_for('login_view'))
     else:
-        # user_id = 2 #仮ユーザーID　セッション管理実装後に変更要
         posts = All_Post.get_all() # All_Postクラス・get_all()
         for post in posts:
             if isinstance(post['menu_name'], str):
@@ -192,6 +190,9 @@ def posts_list_detail_view(post_id):
     post['user_name'] = User.get_name_by_id(post['user_id'])
     # post['reaction'] = Reactions.count_reaction(post['reaction'])
 
+    # リアクション表示(DBから取得→表示)
+    reactions = Reactions.get_reaction(post_id)
+
     # コメント
     comments = Comments.get_by_post_id(post_id) #commentsクラス・get_by_post_id()
     for comment in comments:
@@ -201,10 +202,7 @@ def posts_list_detail_view(post_id):
     # コメント数を取得
     post['comments_count'] = Comments.count_by_comment(post['id'])
 
-    # リアクション数を取得
-
-
-    return render_template('post/post_detail.html', post=post, comments=comments, user_id=user_id)
+    return render_template('post/post_detail.html', post=post, comments=comments, user_id=user_id, reactions = reactions)
 
 # 投稿に対するコメント処理(途中)
 @app.route('/posts_list/<int:post_id>/comments', methods=['POST'])
@@ -226,14 +224,18 @@ def timer_view():
         return redirect(url_for('login_view'))
     return render_template('timer.html')
 
-# リアクション登録(途中)
+# リアクション機能
+# 登録
 @app.route('/posts_list/<int:post_id>/reaction', methods=['POST'])
 def add_reaction(post_id):
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login_view'))
     else:
-        reactions.Reactions(user_id, post_id, reaction_id)
+        select_reaction = int(request.form.get('reaction_id'))
+        Reactions.add_reaction(user_id, post_id, select_reaction)
+
+    return redirect(url_for('posts_list_detail_view', post_id=post_id))
 
 if __name__=='__main__':
     app.run(host="0.0.0.0", debug=True)

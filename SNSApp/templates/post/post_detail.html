@@ -93,6 +93,17 @@
                             </button>
                          </div>
                     </form>
+                    {% for reaction_kind in reactions %}
+                    <div class="reaction">
+                        <form class="reaction" action="/posts_list/{{ post.id }}/reaction" method="post">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button class="btn" type="submit" name="reaction_id" value="{{ reaction_kind.id }}">
+                                {{ reaction_kind.reaction}}
+                                {{ reaction_kind.count}}
+                            </button>
+                        </form>
+                    </div>
+                    {% endfor %}
                 </div>
         </div>
 
