@@ -43,7 +43,9 @@
             <!--新規登録へ飛んでもらうボタンのところ-->
             <div class="to-signup">
                 <p>初めての方はこちらから</p>
-                <button class="to-signup" onclick="location.href='/signup'">新規登録</button>
+                <a href="{{ url_for('signup_view') }}">
+                    <button class="to-signup" type="button">新規登録</button>
+                </a>
             </div>
         </form>
 
