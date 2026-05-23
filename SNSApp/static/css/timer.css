@@ -1,0 +1,147 @@
+/* * {
+    outline: 1px solid blue;
+} */
+
+
+/* これらも一旦仮で、後で共通css適用させて全削除予定 */
+
+
+/* ======================================
+   1. 共通設定
+========================================= */
+/* .timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0px auto;
+    padding: 20px;
+    gap: 40px;
+    background-color: rgb(247, 239, 255);
+} */
+
+/* ======================================
+   2. 個別設定
+========================================= */
+/* .timer-display {
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.timer-adjust, 
+.timer-controls {
+    display: flex;
+    justify-content: center;
+}
+
+.timer-adjust {
+    gap: 15px;
+}
+
+.timer-controls {
+    gap: 24px;
+} */
+
+
+
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 40px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+.timer-container .timer-display {
+    font-size: 72px;
+    font-weight: bold;
+    color: #2b2b2b;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.timer-container .timer-adjust, 
+.timer-container .timer-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.timer-container .timer-adjust {
+    gap: 15px;
+}
+
+.timer-container .timer-controls {
+    gap: 24px;
+}
+
+.timer-container .btn-adjust {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #444444;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 50px;
+    cursor: pointer;
+    width: auto;
+    white-space: nowrap;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.timer-container .btn-reset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    font-size: 16px;
+    color: #007aff;
+    background-color: #ffffff;
+    border: 1px solid #007aff;
+    border-radius: 50px;
+    width: 140px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.timer-container .btn-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #d32f2f;
+    border: none;
+    border-radius: 50px;
+    width: 140px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+.timer-container .btn-adjust:active,
+.timer-container .btn-reset:active {
+    background-color: #f5f5f5;
+}
+
+.timer-container .btn-toggle:active {
+    background-color: #b71c1c;
+}
+
+
+
