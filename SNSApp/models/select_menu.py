@@ -1,4 +1,4 @@
-from flask import abort
+from flask import abort, request
 import pymysql
 from util.DB import DB
 
@@ -18,7 +18,7 @@ class Menu:
         conn = db_pool.get_conn()
         # 例外処理
         try:
-            with conn.cursor() as cur:  #connでDB接続→カーソル取得 カーソル通じてクエリを実行
+            with conn.cursor(pymysql.cursors.DictCursor) as cur:  #connでDB接続→カーソル取得 カーソル通じてクエリを実行
                 sql = 'SELECT * FROM Training'
                 cur.execute(sql) #execute()でクエリ実行
                 menu_all = cur.fetchall() #クエリの結果を取得(辞書のリスト)
@@ -29,30 +29,42 @@ class Menu:
         finally:
             db_pool.release(conn) #DB接続の解放
 
+# <登録処理>
 class Rec:
     @classmethod
-    def record_DB(menus, menus_reps, menu_sets, menu, rep, set_count, content):
-        # メニュー・回数・セット数を順番にDBに登録
-        for i in range(len(menus)): #len関数でメニュー数分繰り返し
-            menu_name = request.form.get(menu[i])
-            reps = request.form.get(rep[i])
-            set_count = request.form.get(set_count[i])
+    def record_DB(cls, content_key, menu_key, reps_key, set_count_key, user_id):
+        
+        content = request.form.get(content_key, '').strip()
+        # メニュー選択項目を配列として入れる
+        menus = request.form.getlist(menu_key)
+        menus_reps = request.form.getlist(reps_key)
+        menus_sets = request.form.getlist(set_count_key)
 
-            conn = db_pool.get_conn()
-            try:
-                with conn.cursor() as cur:
-                    sql_1 = "INSERT INTO Posts (user_id, content) VALUES (%s, %s);"
-                    cur.execute(sql_1, (user_id, content))
+        conn = db_pool.get_conn()
+        try:
+            with conn.cursor(pymysql.cursors.DictCursor) as cur:
+                sql_1 = "INSERT INTO Posts (user_id, content) VALUES (%s, %s);"
+                cur.execute(sql_1, (user_id, content))
 
-                    user_id = cursor.lastrowid
+                post_id = cur.lastrowid #直前のINSERT文で自動生成されたIDを取得
+
+                # メニュー・回数・セット数を順番にDBに登録
+                for i in range(len(menus)): #len関数でメニュー数分繰り返し
+                        #メニューが選択されていない場合はスキップ
+                    if not menus[i]:
+                        continue
+
+                    menu_id = menus[i]
+                    reps = menus_reps[i]
+                    set_count = menus_sets[i]
 
                     sql_2 = "INSERT INTO Post_Training (user_id, post_id, training_id, reps, set_count) VALUES (%s, %s, %s, %s, %s);"
-                    cur.execute(sql_2, (user_id, post_id, training_id, reps, set_count)) 
-    
+                    cur.execute(sql_2, (user_id, post_id, menu_id, reps, set_count)) 
+            
                     conn.commit()
 
-            except pymysql.Error as e:
-                print(f'エラーが発生しています：{e}')
-                abort(500)
-            finally:
-                db_pool.release(conn)
+        except pymysql.Error as e:
+            print(f'エラーが発生しています：{e}')
+            abort(500)
+        finally:
+            db_pool.release(conn)

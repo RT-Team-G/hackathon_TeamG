@@ -18,23 +18,23 @@
       <form class="training-post-form" action="/post" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="cards-wrapper">
-          {% for i in range(max_cards | default(5)) %}
+          {% for i in range(5) %}
             <div class="training-post-card {% if loop.first %}is-visible{% endif %}">
               <div class="remove-btn-wrapper">
                 <button type="button" class="remove-btn" aria-label="削除">✕</button>
               </div>
               <div class="training-post-field"> 
-                <select class="main-select" name="menu[]" required>
+                <select class="main-select" name="menu[]">  <!-- requiredは削除 -->
                   <option value="" disabled selected hidden>選んでください</option>
                   {% for choice in choices %}
                   <option value="{{ choice.id }}">{{ choice.menu_name }}</option>
                   {% endfor %}
-                  <option value="other">その他</option> <!-- 仮置き -->
+                  <!-- <option value="other">その他</option> 仮置き -->
                 </select>
               </div>
-              <div class="training-post-field other-input-wrapper">
+              <!-- <div class="training-post-field other-input-wrapper">
                 <input type="text" name="other[]" placeholder="トレーニング名を入力">
-              </div>
+              </div> -->
               <div class="training-post-field is-right">
                 <label>
                   <select name="reps[]">
@@ -66,7 +66,6 @@
       </form>
     </main>
   </div>
-  {% endblock %}
-  {% block scripts %}
+
     <script src="{{ url_for('static', filename='js/training-post.js') }}" defer></script>
   {% endblock %}
