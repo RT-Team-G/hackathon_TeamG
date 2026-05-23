@@ -1,29 +1,3 @@
-/* =======================================
-ツリー図
-.page-posts
-├── .title-group
-│   ├── .page-title
-│   └── .page-note
-└── .training-post-form
-├── .cards-wrapper
-│   └── .training-post-card (is-visible / animation)
-│       ├── .remove-btn-wrapper
-│       ├── .training-post-field (main-select)
-│       ├── .other-input-wrapper (JS control)
-│       └── .training-post-field.is-right (reps/sets)
-├── .add-btn-wrapper
-│   └── .add-btn (disabled)
-├── textarea
-└── .post-btn (disabled)
-========================================== */
-
-/* * {
-    outline: 1px solid blue;
-    margin: 0px;
-    padding: 0px;
-} */
-
-
 /* ======================================
    1. ベース＆レイアウト
 ========================================= */
