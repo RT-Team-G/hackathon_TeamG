@@ -5,7 +5,7 @@ from util.DB import DB
 # 初期起動時にコネクションプールを作成し接続を確立
 db_pool = DB.init_db_pool()
 
-# All_Postクラス
+# All_Postクラス JSON_ARRAYAGG(pt.training_time) AS sec 追加
 class All_Post:
     @classmethod
     def get_all(cls):
@@ -13,7 +13,7 @@ class All_Post:
         try:
             with conn.cursor(pymysql.cursors.DictCursor) as cur:
                 sql = """
-                        SELECT pt.post_id AS id, JSON_ARRAYAGG(t.menu_name) AS menu_name, JSON_ARRAYAGG(pt.reps) AS reps, JSON_ARRAYAGG(pt.set_count) AS set_count, MAX(pt.created_at) AS created_at, ANY_VALUE(p.content) AS content, ANY_VALUE(p.user_id) AS user_id 
+                        SELECT pt.post_id AS id, JSON_ARRAYAGG(t.menu_name) AS menu_name, JSON_ARRAYAGG(pt.reps) AS reps, JSON_ARRAYAGG(pt.set_count) AS set_count, JSON_ARRAYAGG(pt.training_time) AS sec, MAX(pt.created_at) AS created_at, ANY_VALUE(p.content) AS content, ANY_VALUE(p.user_id) AS user_id 
                         FROM Post_Training pt LEFT OUTER JOIN Training t ON pt.training_id = t.id 
                         LEFT OUTER JOIN Posts p ON pt.post_id = p.id 
                         GROUP BY pt.post_id 
