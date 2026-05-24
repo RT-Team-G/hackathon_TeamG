@@ -8,12 +8,20 @@
 body{
     margin: 0;
     font-family:sans-serif,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: #f7f6f5;
+    background: linear-gradient(
+  180deg,
+  #F1CBFF,
+  #CBDBFF
+);
+color:#2D21AC;
 }
 
 h1{
     font-size: 24px;
     text-align: center;
+}
+h2{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 a{
@@ -34,6 +42,9 @@ main{
 
 top-image{
     width: 100%;
+}
+img{
+    width:100%;
 }
 
 
