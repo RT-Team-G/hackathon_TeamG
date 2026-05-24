@@ -31,14 +31,16 @@ class Menu:
 
 # <登録処理>
 class Rec:
-    @classmethod
-    def record_DB(cls, content_key, menu_key, reps_key, set_count_key, user_id):
+    @classmethod #sec_key追加した
+    def record_DB(cls, content_key, menu_key, reps_key, set_count_key, sec_key, user_id):
         
         content = request.form.get(content_key, '').strip()
         # メニュー選択項目を配列として入れる
         menus = request.form.getlist(menu_key)
         menus_reps = request.form.getlist(reps_key)
         menus_sets = request.form.getlist(set_count_key)
+        #秒数追加
+        menus_secs = request.form.getlist(sec_key)
 
         conn = db_pool.get_conn()
         try:
@@ -58,10 +60,14 @@ class Rec:
                     reps = menus_reps[i]
                     set_count = menus_sets[i]
 
-                    sql_2 = "INSERT INTO Post_Training (user_id, post_id, training_id, reps, set_count) VALUES (%s, %s, %s, %s, %s);"
-                    cur.execute(sql_2, (user_id, post_id, menu_id, reps, set_count)) 
-            
-                    conn.commit()
+                    #空文字なら0
+                    sec_value = menus_secs[i] if i < len(menus_secs) else 0
+                    training_time = int(sec_value) if sec_value else 0
+
+                    # sql2にtrainng_time追加
+                    sql_2 = "INSERT INTO Post_Training (user_id, post_id, training_id, reps, set_count, training_time) VALUES (%s, %s, %s, %s, %s, %s);"
+                    cur.execute(sql_2, (user_id, post_id, menu_id, reps, set_count, training_time)) 
+                conn.commit()
 
         except pymysql.Error as e:
             print(f'エラーが発生しています：{e}')
