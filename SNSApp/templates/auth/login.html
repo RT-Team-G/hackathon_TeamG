@@ -4,57 +4,49 @@
 
 {% block content %}
 <!--これ↓消すかも↓↓↓-->
-<div class="auth-topgazou">
-
-</div>
-<main class="auth-main">
-    <div class="auth-wrapper">
-        <h2 class="auth-title">ログイン</h2>
-        <p class="auth-subtitle">メールアドレスとパスワードを入力してログインしてください</p>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-            <div class="flash-messages">
-                {% for category, message in messages %}
-                <div class="flash flash-{{ category }}">
-                    <p class="{{ category }}">{{ message }}</p>
+  <div class="auth-topgazou"></div>
+  <div class="page-auth">
+    <main class="auth-main">
+      <div class="auth-wrapper">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="auth-title">ログイン</h2>
+            <p class="auth-subtitle">メールアドレスとパスワードを入力してログインしてください</p>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <div class="flash-messages">
+                  {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">
+                      {{ message }}
+                    </div>
+                    {#↑errorだったりsuccessだったりその時によりclass名変わる#}
+                  {% endfor %}
                 </div>
-                 {#↑errorだったりsuccessだったりその時によりclass名変わる#}
-                 {% endfor %}
-            </div>
-            {% endif %}
-        {% endwith %}
-
-        <form class="auth-form" method="POST">
+              {% endif %}
+            {% endwith %}
+          </div>
+          <form class="auth-form" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <!--フォーム、入力するところここから-->
-            <div class="">
-                <label>メールアドレス</label>
-                <input type="text" placeholder="メールアドレス" name="email" />
+            <div>
+              <label>メールアドレス</label>
+              <input type="text" placeholder="メールアドレス" name="email" />
             </div>
 
-            <div class="">
-                <label>パスワード</label>
-                <input type="password" placeholder="パスワード" name="password" />
+            <div>
+              <label>パスワード</label>
+              <input type="password" placeholder="パスワード" name="password" />
             </div>
             <!--ログインボタン-->
-            <div class="auth-button">
-                <button class="auth-button" type="submit">ログイン</button>
-            </div>
+            <button class="auth-button" type="submit">ログイン</button>
             <!--新規登録へ飛んでもらうボタンのところ-->
-            <div class="to-signup">
-                <p>初めての方はこちらから</p>
-                <a href="{{ url_for('signup_view') }}">
-                    <button class="to-signup" type="button">新規登録</button>
-                </a>
-            </div>
-        </form>
-
-
-
-    </div>
-</main>
-
-
-
-
+          </form>
+          <div class="signup-container">
+            <p>初めての方はこちらから</p>
+            <a class="signup-button" href="{{ url_for('signup_view') }}">新規登録</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 {% endblock %}
