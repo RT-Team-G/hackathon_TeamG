@@ -44,6 +44,16 @@
                   </select>
                   回
                 </label>
+                <!--秒-->
+                <label>
+                  <select name="sec[]">
+                    <option value="0" selected>0</option>
+                    {% for s in range(0, 185, 5) %}
+                    <option value="{{ s }}">{{ s }}</option>
+                    {% endfor %}
+                  </select>
+                  秒
+                </label>
                 <label>
                   <select name="set_count[]">
                     {% for k in range(max_sets | default(5)) %}

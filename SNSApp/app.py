@@ -136,8 +136,9 @@ def create_post():
     user_id = session.get('user_id')
     if user_id is None:
         return redirect(url_for('login_view'))
-
-    Rec.record_DB('content', 'menu[]', 'reps[]', 'set_count[]', user_id)
+    
+    # sec[]追加
+    Rec.record_DB('content', 'menu[]', 'reps[]', 'set_count[]', 'sec[]', user_id)
 
     return redirect(url_for('posts_list_view'))
 
@@ -155,8 +156,9 @@ def posts_list_view():
                 post['menu_name'] = json.loads(post['menu_name'])
             if isinstance(post['reps'], str):
                 post['reps'] = json.loads(post['reps'])
-            # if isinstance(post['sec'], str):
-            #     post['sec'] = json.loads(post['sec'])
+            # こめんと削除 一部追加
+            if 'sec' in post and isinstance(post['sec'], str):
+                 post['sec'] = json.loads(post['sec'])
             if isinstance(post['set_count'], str):
                 post['set_count'] = json.loads(post['set_count'])
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
@@ -165,7 +167,7 @@ def posts_list_view():
             post['comments_count'] = Comments.count_by_comment(post['id'])
             # post['reaction'] = Reactions.count_reaction(post['reaction'])
 
-        return render_template('main/posts.html', posts=posts, post=post, user_id=user_id)
+        return render_template('main/posts.html', posts=posts, user_id=user_id)
         
 # 投稿詳細画面表示(途中)
 @app.route('/posts_list/<int:post_id>', methods=['GET'])
@@ -182,8 +184,9 @@ def posts_list_detail_view(post_id):
         post['menu_name'] = json.loads(post['menu_name'])
     if isinstance(post['reps'], str):
         post['reps'] = json.loads(post['reps'])
-    # if isinstance(post['sec'], str):
-    #     post['sec'] = json.loads(post['sec'])
+    #コメント削除
+    if isinstance(post['sec'], str):
+         post['sec'] = json.loads(post['sec'])
     if isinstance(post['set_count'], str):
         post['set_count'] = json.loads(post['set_count'])
     post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
