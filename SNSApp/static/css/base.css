@@ -1,3 +1,9 @@
+
+/* これは作業完了次第消す */
+/* * {
+    outline: 1px solid red;
+} */
+
 /* このファイルは共通のcssのつもりでしたができたら全部書きます */
 /* ここからは共通のcss */
 *{
@@ -184,7 +190,8 @@ img{
 
 .auth-wrapper{
     display: flex;
-    align-items: center;
+    flex-direction: column; /* 縦並びに！ */
+    align-items: center; /* 左右中央に！ */
 }
 
 .auth-title, .auth-subtitle{
