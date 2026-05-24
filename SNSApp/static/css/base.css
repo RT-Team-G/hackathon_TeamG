@@ -14,12 +14,20 @@
 body{
     margin: 0;
     font-family:sans-serif,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: #f7f6f5;
+    background: linear-gradient(
+  180deg,
+  #F1CBFF,
+  #CBDBFF
+);
+color:#2D21AC;
 }
 
 h1{
     font-size: 24px;
     text-align: center;
+}
+h2{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 a{
@@ -40,6 +48,9 @@ main{
 
 top-image{
     width: 100%;
+}
+img{
+    width:100%;
 }
 
 
@@ -129,6 +140,7 @@ top-image{
     min-width: 0;
     max-width: 30%;
     text-align: right;
+    font-size: 10px;
     overflow-wrap: break-word;
 }
 
@@ -136,6 +148,16 @@ top-image{
     margin-top:8px;
     font-size: 14px;
     line-height: 1.5;
+}
+
+.post-btn{
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+.count{
+    font-size: 12px;
+    vertical-align: middle;
 }
 
 /*フッターっぽいところにあるボタン用のところ*/
