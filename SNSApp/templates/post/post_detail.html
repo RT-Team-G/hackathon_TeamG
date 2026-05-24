@@ -23,15 +23,19 @@
                     </div>
 
                     <!-- ３ブロックにカード内を分けるとしてここは左↓ -->
-                    <div class="post-left">
+                    <!-- <div class="post-left">
+                        <div class="post-user">
+                            postしたユーザーの名前ここに入ります
+                            <span class="display-name">{{ post.user_name }}</span>
+                        </div>
+                    </div> -->
+
+                    <!-- ここは真ん中↓ -->
+                    <div class="post-center">
                         <div class="post-user">
                             <!-- postしたユーザーの名前ここに入ります -->
                             <span class="display-name">{{ post.user_name }}</span>
                         </div>
-                    </div>
-
-                    <!-- ここは真ん中↓ -->
-                    <div class="post-center">
                         <!--トレーニングを選んだものがここに列挙されるように↓ -->
                         <ul class="training-list">
 
@@ -50,7 +54,7 @@
                                 {% endif %}
 
                                 {% if post.set_count %}
-                                    {{ post.set_count[i] }}セット
+                                    × {{ post.set_count[i] }}
                                 {% endif %}
 
                                 {# {% if post.other %}
@@ -65,10 +69,6 @@
                     <!-- ここは右↓ -->
                     <div class="post-right">
                         <div class="post-time">{{ post.created_at }}</div>
-                        <div class="good-comments">
-                            <!-- <div class="good">いいね（{{ post }}）</div> -->
-                            <div class="comments">コメント（{{ post.comments_count }}）</div>
-                        </div>
                     </div>
                 </div>
                 <!--自由記述のところがあったらのところ-->
@@ -87,23 +87,29 @@
 
                          <textarea name="content" placeholder="コメントする"></textarea>
 
+                         <div class="post-actions">
+                            <!-- <div class="good">いいね（{{ post }}）</div> -->
+                            <div class="post-btn">💬 <span class="count">{{ post.comments_count }}</span></div>
+                         </div>
+
                          <div class="post-footer">
                             <button class="btn" type="submit">
                                 送る
                             </button>
                          </div>
                     </form>
-                    {% for reaction_kind in reactions %}
-                    <div class="reaction">
-                        <form class="reaction" action="/posts_list/{{ post.id }}/reaction" method="post">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                            <button class="btn" type="submit" name="reaction_id" value="{{ reaction_kind.id }}">
-                                {{ reaction_kind.reaction}}
-                                {{ reaction_kind.count}}
-                            </button>
-                        </form>
+                    <div class="reaction-list">
+                        {% for reaction_kind in reactions %}
+                        <span class="reaction">
+                            <form class="reaction" action="/posts_list/{{ post.id }}/reaction" method="post">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <button class="reaction_btn" type="submit" name="reaction_id" value="{{ reaction_kind.id }}">
+                                    {{ reaction_kind.reaction }} {{ reaction_kind.count }}
+                                </button>
+                            </form>
+                        </span>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
         </div>
 
