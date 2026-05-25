@@ -48,10 +48,10 @@
               <div class="training-post-field is-right">
                 <label>
                   <select name="reps[]">
-                    <option value="0">秒数表示</option>
-                    {% for j in range(max_reps | default(30)) %}
+                    <option value="0">0</option>
+                    {% for j in range(5, (max_reps | default(30)) + 1, 5) %}
                     <!-- デフォルトで１回を選択状態にする-->
-                    <option value="{{ j+1 }}" {% if j +1 == 1 %}selected{% endif %}>{{ j+ 1 }}</option>
+                    <option value="{{ j+1 }}">{{ j }}</option>
                     {% endfor %}
                   </select>
                   回
@@ -59,10 +59,10 @@
                 <!--秒-->
                 <label>
                   <select name="sec[]">
-                    <option value="0">回数表示</option>
+                    <option value="0" selected>0</option>
                     {% for s in range(10, 125, 10) %}
                     <!-- デフォルトで10秒を選択状態にする-->
-                    <option value="{{ s }}" {% if s == 10 %}selected{% endif %}>{{ s }}</option>
+                    <option value="{{ s }}">{{ s }}</option>
                     {% endfor %}
                   </select>
                   秒
@@ -121,9 +121,8 @@
           repsSelect.value = "0"; // 裏データは0 (秒数を表示)
         } else {
           // 回数を選ぶなら秒数を表示
-          secLabel.style.display = 'none';
           repsLabel.style.display = 'inline-block';
-          repsSelect.value = "1"; //回数初期1回に戻す
+          repsSelect.value = "0"; //回数初期0回に戻す
         }
       });
 
@@ -136,9 +135,8 @@
           secSelect.value = "0"; // 0秒(初期値)
         } else {
           // 回数を選ぶなら秒数を復活
-          repsLabel.style.display = 'none';
           secLabel.style.display = 'inline-block';
-          secSelect.value = "10"; //秒数の初期値を10秒に戻す
+          secSelect.value = "0"; //秒数の初期値を0秒に戻す
         }
       });
 
@@ -148,8 +146,8 @@
         mainSelect.addEventListener('change', function() {
           repsLabel.style.display = 'inline-block';
           secLabel.style.display = 'inline-block';
-          repsSelect.value = "1"; // 種目かえたら回数を0にリセット
-          secSelect.value = "10"; // 種目をかえたら秒数を0にリセット
+          repsSelect.value = "0"; // 種目かえたら回数を0にリセット
+          secSelect.value = "0"; // 種目をかえたら秒数を0にリセット
         });
       }
     });
