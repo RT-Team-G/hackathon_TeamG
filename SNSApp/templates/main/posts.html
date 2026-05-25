@@ -60,17 +60,19 @@
                                 {% if post.menu_name %}
                                     {{ post.menu_name[i] }}
                                 {% endif %}
-
-                                {% if post.reps %}
+                                
+                                <!--回数が1じゃない時、または秒数が1の時だけ〇〇回と表示-->
+                                {% if post.reps and (post.reps[i]|int != 1 or post.sec[i]|int == 0) %}
                                     {{ post.reps[i] }}回
                                 {% endif %}
 
-                                {% if post.sec %}
+                                {% if post.sec and post.sec[i]| int != 0 %}
                                     {{ post.sec[i] }}秒
                                 {% endif %}
 
+                                <!-- 秒数が0じゃない時〇〇秒と表示-->
                                 {% if post.set_count %}
-                                    ×{{ post.set_count[i] }}
+                                    ×{{ post.set_count[i] }}セット
                                 {% endif %}
 
                                 {# {% if post.other %}
