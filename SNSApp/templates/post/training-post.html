@@ -48,8 +48,9 @@
               <div class="training-post-field is-right">
                 <label>
                   <select name="reps[]">
-                    {% for j in range(max_reps | default(30)) %}
-                    <option value="{{ j+1 }}">{{ j+1 }}</option>
+                    <option value="0" selected>0</option>
+                    {% for j in range(5, max_reps | default(50)+1, 5) %}
+                    <option value="{{ j }}">{{ j }}</option>
                     {% endfor %}
                   </select>
                   回
@@ -58,7 +59,7 @@
                 <label>
                   <select name="sec[]">
                     <option value="0" selected>0</option>
-                    {% for s in range(0, 185, 5) %}
+                    {% for s in range(10, 185, 10) %}
                     <option value="{{ s }}">{{ s }}</option>
                     {% endfor %}
                   </select>
@@ -77,16 +78,16 @@
             {% endfor %}
           </div>
           <div class="add-btn-wrapper">
-            <button type="button" class="add-btn">項目を追加</button>
+            <button type="button" class="add-btn" style="cursor: pointer;">項目を追加</button>
           </div>
         <div>
           <textarea placeholder="自由記述欄（感想や言い訳など・・）" name="content"></textarea>
         </div>
-        <button type="submit" class="post-btn">できた</button>
+        <button type="submit" class="post-btn" style="cursor: pointer;">できた</button>
       </form>
     <!--</main>-->
     <div class="footer-menu">
-    <a href="" class="footer-btn">トップ</a>
+    <a href="./posts_list" class="footer-btn">トップ</a>
     <a href="./timer" class="footer-btn">タイマー</a>
 </div>
   </div>

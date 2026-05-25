@@ -51,14 +51,16 @@
                     <input type="password" placeholder="パスワード" name="password_confirmation" />
                 </div>
 
+                <!--これを押すとsignup_processが動き出す-->
+                <button class="auth-button" type="submit">登録</button>
+                
                 <div class="auth-button">
-                    <!--これを押すとsignup_processが動き出す-->
-                    <button class="auth-button" type="submit">登録</button>
                     <!--ログインへ間違えて入ってしまったら用-->
                     <a class="swith-auth" href="{{ url_for('login_view') }}">
                         ログイン画面に戻る
                     </a>
                 </div>
+                    
                 </form>
     <!-- </div> -->
     </div>

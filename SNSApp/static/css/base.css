@@ -55,6 +55,21 @@ img{
     width:100%;
 }
 
+/* ヘッダー */
+.header-inner {
+    text-align: center;
+    width: 100%;
+}
+
+.top-image img {
+    text-align: center;
+    max-width: 100%;
+    max-height: 100px;
+    object-fit: contain;
+    width: auto;
+    height: auto;
+}
+
 /*共通のフッター*/
 .footer-text{
     text-align: center;
@@ -314,6 +329,7 @@ img{
   flex-direction: column;
   gap: 14px;
   margin-top: 8px;
+  width: 100%;
 }
 
 
@@ -330,6 +346,8 @@ img{
 
 .auth-form input[type="text"],
 .auth-form input[type="password"] {
+  border: none;
+  border-radius: 16px;
   padding: 14px 16px;
 }
 
