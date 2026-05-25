@@ -27,7 +27,9 @@ h1{
     text-align: center;
 }
 h2{
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(173, 153, 237, 0.5);
+    text-align: center;
+    margin:32px auto;
 }
 
 a{
@@ -53,7 +55,12 @@ img{
     width:100%;
 }
 
-
+/*共通のフッター*/
+.footer-text{
+    text-align: center;
+    margin:16px;
+    font-size: 8px;
+}
 
 
 /* postsのデザイン */
@@ -72,9 +79,13 @@ img{
     flex-direction: column;
     gap: 12px;
     padding: 12px;
-    border: 1px solid #333;
+    border: 1px solid rgba(51,51,51,0.3);
     border-radius: 6px;
-    box-shadow: 10px 5px 5px #333;
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 10px 5px 5px #cfcfd0;
+    backdrop-filter: blur(10px);
+    border-top:1px solid rgba(255,255,255,0.5);
+    border-left:1px solid rgba(255,255,255,0.4);
     margin-bottom: 32px;
     width: 100%;
     max-width: 354px;
@@ -232,12 +243,25 @@ img{
 /*フッターっぽいところにあるボタン用のところ*/
 .footer-menu{
     text-align: center;
+    width: 100%;
+    max-width: 354px;
+    margin:24px auto;
+
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .footer-btn {
     display: inline-block;
     padding: 8px 16px;
-    border: #24140e solid 1px;
+    color:#2D21AC;
+    border: 1px solid rgba(51,51,51,0.3);
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 10px 5px 5px #cfcfd0;
+    backdrop-filter: blur(10px);
+    border-top:1px solid rgba(255,255,255,0.5);
+    border-left:1px solid rgba(255,255,255,0.4);
     border-radius: 8px;
     text-align: center;
 }
@@ -245,8 +269,8 @@ img{
 /*できたスタンプ見たいなもの角度とかここで調節。文字変えたい時はhtmlの方で*/
 .dekita{
     position:absolute ;
-    top:-8px;
-    left: 8px;
+    top:-20px;
+    left: -20px;
     transform: rotate(-30deg);
     color: red;
     opacity: 0.5;

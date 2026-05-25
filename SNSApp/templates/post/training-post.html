@@ -1,4 +1,14 @@
 {% extends "base.html" %}
+<!--パンくずのところ-->
+{% block breadcrumb%}
+<nav class="breadcrumb">
+    <a href="/">トップ</a>
+    <span>＞</span>
+	<a href="/training-post">トレーニング</a>
+	<span>＞</span>
+
+</nav>
+{% endblock %}
 
 {% block title %} トレーニング選択・投稿画面 {% endblock %}
 
@@ -10,7 +20,7 @@
 
   <div class="page-posts">
     <!-- メイン -->
-    <main>
+    <!--<main>-->
       <div class="title-group">
         <h2 class="page-title">今日のトレーニング</h2>
         <small class="page-note">※複数選択可</small>
@@ -74,7 +84,11 @@
         </div>
         <button type="submit" class="post-btn">できた</button>
       </form>
-    </main>
+    <!--</main>-->
+    <div class="footer-menu">
+    <a href="" class="footer-btn">トップ</a>
+    <a href="./timer" class="footer-btn">タイマー</a>
+</div>
   </div>
 
     <script src="{{ url_for('static', filename='js/training-post.js') }}" defer></script>

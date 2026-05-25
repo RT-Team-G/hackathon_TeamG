@@ -183,6 +183,10 @@ button {
     font-weight: bold;
     font-size: 18px;
     box-shadow: 0 4px 12px rgba(124, 77, 255, 0.4);
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ボタンの非表示 */
@@ -190,4 +194,14 @@ button {
 .remove-btn:disabled {
     color: #ccc;
     opacity: 0.5;
+}
+
+/*すみません追加してみてます*/
+.training-post-form textarea{
+    border: 1px solid rgba(51,51,51,0.3);
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 10px 5px 5px #cfcfd0;
+    backdrop-filter: blur(10px);
+    border-top:1px solid rgba(255,255,255,0.5);
+    border-left:1px solid rgba(255,255,255,0.4);
 }

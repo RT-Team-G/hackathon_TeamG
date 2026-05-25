@@ -1,4 +1,16 @@
 {% extends "base.html"%}
+<!--パンくずのところ-->
+{% block breadcrumb%}
+<nav class="breadcrumb">
+    <a href="/">トップ</a>
+    <span>＞</span>
+	<a href="./training-post">トレーニング</a>
+	<span>＞</span>
+	<a href="/timer.html">タイマー</a>
+	<span>＞</span>
+
+</nav>
+{% endblock %}
 
 {% block title %}タイマー画面{% endblock %}
 
