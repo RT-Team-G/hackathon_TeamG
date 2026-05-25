@@ -59,7 +59,8 @@
                 <label>
                   <select name="sec[]">
                     <option value="0" selected>0</option>
-                    {% for s in range(10, 185, 10) %}
+                    {% for s in range(10, 125, 10) %}
+                    <!-- デフォルトで10秒を選択状態にする-->
                     <option value="{{ s }}">{{ s }}</option>
                     {% endfor %}
                   </select>
@@ -93,4 +94,62 @@
   </div>
 
     <script src="{{ url_for('static', filename='js/training-post.js') }}" defer></script>
+
+ <script>
+  // 読み込み準備
+  document.addEventListener('DOMContentLoaded', function() {
+    // 画面内の全てのトレーニングカードをし処理
+    const cards = document.querySelectorAll('.training-post-card');
+    // 1枚ずつ処理
+    cards.forEach(card => {
+      // 回数を選ぶセレクトボックスを見つけてrepSelectにする
+      const repsSelect = card.querySelector('select[name="reps[]"]');
+      // 秒数セレクト
+      const secSelect = card.querySelector('select[name="sec[]"]');
+      // もし見つからない場合はこのカードの処理をスキップする
+      if (!repsSelect || !secSelect) return;
+      // labelの回と書いてるの名前をrepsLabelにする
+      const repsLabel = repsSelect.closest('label');
+      // 秒をsecLabelに
+      const secLabel = secSelect.closest('label');
+      // 秒数を変更したら
+      secSelect.addEventListener('change', function() {
+        // 0秒以外なら回数を隠す
+        if (this.value !== "0") {
+          repsLabel.style.display = 'none';
+          repsSelect.value = "0"; // 裏データは0 (秒数を表示)
+        } else {
+          // 回数を選ぶなら秒数を表示
+          repsLabel.style.display = 'inline-block';
+          repsSelect.value = "0"; //回数初期0回に戻す
+        }
+      });
+
+      // 回数のセレクトボックスが変更されたとき
+      repsSelect.addEventListener('change', function() {
+        //回数が選ばれたなら秒数を0にして非表示
+        if (this.value !== "0") {
+          //秒数を隠す(10秒～)
+          secLabel.style.display = 'none';
+          secSelect.value = "0"; // 0秒(初期値)
+        } else {
+          // 回数を選ぶなら秒数を復活
+          secLabel.style.display = 'inline-block';
+          secSelect.value = "0"; //秒数の初期値を0秒に戻す
+        }
+      });
+
+      // もし種目セレクトボックスが変更されたら療両方リセット
+      const mainSelect = card.querySelector('.main-select');
+      if (mainSelect) {
+        mainSelect.addEventListener('change', function() {
+          repsLabel.style.display = 'inline-block';
+          secLabel.style.display = 'inline-block';
+          repsSelect.value = "0"; // 種目かえたら回数を0にリセット
+          secSelect.value = "0"; // 種目をかえたら秒数を0にリセット
+        });
+      }
+    });
+  });
+ </script>
   {% endblock %}
