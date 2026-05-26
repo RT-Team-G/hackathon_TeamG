@@ -190,6 +190,10 @@ def posts_list_detail_view(post_id):
     if isinstance(post['reps'], str):
         post['reps'] = json.loads(post['reps'])
     #コメント削除
+    #↓ここ加えました5/26
+    if 'sec' not in post:
+        post['sec'] = []
+    
     if isinstance(post['sec'], str):
          post['sec'] = json.loads(post['sec'])
     if isinstance(post['set_count'], str):
