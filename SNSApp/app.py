@@ -152,6 +152,11 @@ def posts_list_view():
     else:
         posts = All_Post.get_all() # All_Postクラス・get_all()
         for post in posts:
+            
+            #これ↓5/26エラー対策で追加しました
+            if 'sec' not in post:
+                post['sec'] = []
+                
             if isinstance(post['menu_name'], str):
                 post['menu_name'] = json.loads(post['menu_name'])
             if isinstance(post['reps'], str):

@@ -62,7 +62,7 @@
                                 {% endif %}
                                 
                                 <!--回数が1じゃない時、または秒数が1の時だけ〇〇回と表示-->
-                                {% if post.reps and (post.reps[i]|int != 1 or post.sec[i]|int == 0) %}
+                                {% if post.reps and post.sec and (post.reps[i]|int != 1 or post.sec[i]|int == 0) %}
                                     {{ post.reps[i] }}回
                                 {% endif %}
 
