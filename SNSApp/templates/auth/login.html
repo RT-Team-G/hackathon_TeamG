@@ -6,12 +6,12 @@
 <!--これ↓消すかも↓↓↓-->
   <div class="auth-topgazou"></div>
   <div class="page-auth">
-    <main class="auth-main">
+    <body class="auth-main">
       <div class="auth-wrapper">
         <div class="card">
           <div class="card-header">
             <h2 class="auth-title">ログイン</h2>
-            <p class="auth-subtitle">メールアドレスとパスワードを入力してログインしてください</p>
+            <p class="card-subtitle">メールアドレスとパスワードを入力してログインしてください</p>
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
                 <div class="flash-messages">
@@ -47,6 +47,6 @@
           </div>
         </div>
       </div>
-    </main>
+    </body>
   </div>
 {% endblock %}
