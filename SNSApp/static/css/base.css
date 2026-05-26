@@ -81,6 +81,7 @@ img{
 /* postsのデザイン */
 .post-card-wrapper{
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -185,6 +186,7 @@ img{
 }
 
 .post-btn{
+    margin: 8px 16px 0 0;
     font-size: 16px;
     vertical-align: middle;
 }
@@ -245,7 +247,8 @@ img{
 .reaction-list {
     display: flex;
     align-items: center;
-    gap: 8px;
+    margin-left: 16px; 
+    gap: 16px;
     width: 100%;
 }
 
@@ -433,8 +436,9 @@ img{
     border-left:1px solid rgba(255,255,255,0.4);
     border-radius: 8px;
     text-align: center;
-    marigin-bottom:16px;
-    max-width: 354px;
+    margin-bottom:16px;
+    width: 100%;
+    /* max-width: 354px; */
 }
 .btn{
     border: 1px solid rgba(51,51,51,0.3);
@@ -445,4 +449,5 @@ img{
     border-top:1px solid rgba(255,255,255,0.5);
     border-left:1px solid rgba(255,255,255,0.4);
     margin-bottom: 32px;
+    cursor: pointer;
 }

@@ -45,11 +45,11 @@
                                     {{ post.menu_name[i] }}
                                 {% endif %}
 
-                                {% if post.reps %}
+                                {% if post.reps and (post.reps[i]|int != 0 or post.sec[i]|int == 0)%}
                                     {{ post.reps[i] }}回
                                 {% endif %}
 
-                                {% if post.sec %}
+                                {% if post.sec and (post.sec[i]|int != 0 or post.reps[i]|int == 0)%}
                                     {{ post.sec[i] }}秒
                                 {% endif %}
 
@@ -79,6 +79,19 @@
                 {% endif %}
 
                 <!--ここから下がコメントを入力投稿したりいいねなどのリアクションをする場所-->
+                <div class="reaction-list">
+                    <div class="post-btn">💬 <span class="count">{{ post.comments_count }}</span></div>
+                    {% for reaction_kind in reactions %}
+                    <span class="reaction">
+                        <form class="reaction" action="/posts_list/{{ post.id }}/reaction" method="post">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button class="reaction_btn" type="submit" name="reaction_id" value="{{ reaction_kind.id }}">
+                                {{ reaction_kind.reaction }} {{ reaction_kind.count }}
+                            </button>
+                        </form>
+                    </span>
+                    {% endfor %}
+                </div>
                 <!--コメント投稿(クラスpost)-->
                 <div class="new-post">
                     <form class="new-post-main" action="/posts_list/{{ post.id }}/comments" method="post">
@@ -87,10 +100,7 @@
 
                          <textarea name="content" placeholder="コメントする"></textarea>
 
-                         <div class="post-actions">
-                            <!-- <div class="good">いいね（{{ post }}）</div> -->
-                            <div class="post-btn">💬 <span class="count">{{ post.comments_count }}</span></div>
-                         </div>
+                         
 
                          <div class="post-footer">
                             <button class="btn" type="submit">
@@ -98,20 +108,21 @@
                             </button>
                          </div>
                     </form>
-                    <div class="reaction-list">
-                        {% for reaction_kind in reactions %}
-                        <span class="reaction">
-                            <form class="reaction" action="/posts_list/{{ post.id }}/reaction" method="post">
-                                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                                <button class="reaction_btn" type="submit" name="reaction_id" value="{{ reaction_kind.id }}">
-                                    {{ reaction_kind.reaction }} {{ reaction_kind.count }}
-                                </button>
-                            </form>
-                        </span>
-                        {% endfor %}
-                    </div>
+                    
                 </div>
         </div>
+
+        <!-- {% with messages = get_flashed_messages(with_categories=true) %} -->
+        {% if messages %}
+        <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash flash-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        </div>
+        {% endif %}
+        <!-- {% endwith %} -->
 
         <!--いいね！-->
         <div class="comment-section">
@@ -122,21 +133,10 @@
                     <span class="comment-user">{{ comment.user_name }}</span> <!--コメントした人のユーザ名を表示-->
                     <span class="comment-time">{{ comment.created_at }}</span> <!--コメントが投稿された日時-->
                 </div>
-
                 <div class="comment-body">
                     {{ comment.content }}
                 </div>
             </div>
-                <!-- <div class="comment-action">
-                    <form action="/comments/{{ comment.id }}/like" method="post" class="comment-like-form"> -->
-                       <!--クロスサイト対策
-                       <input type="hidden" name="csfr_token" value="{{ csrf_token() }}"> -->
-                       <!-- <button type="submit" class="comment-good-btn"> -->
-                        <!--いいねが1件以上ならその数字を、0件なら0を表示-->
-                        <!-- いいね！ {{comment.likes_count if comment.likes_count else 0}} 
-                       </button> 
-                    </form>
-                </div>
             {% endfor %}
         {% else %}
             <p class="no-comments">まだコメントがありません</p>
@@ -146,6 +146,7 @@
     </body>
     <div class="footer-menu">
         <a href="{{ url_for('posts_list_view') }}" class="footer-btn">トップ</a>
+        <a href="./post" class="footer-btn">トレーニング</a>
     </div>
 </div>
 

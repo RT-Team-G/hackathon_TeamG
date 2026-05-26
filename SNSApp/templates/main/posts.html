@@ -61,23 +61,20 @@
                                     {{ post.menu_name[i] }}
                                 {% endif %}
                                 
-                                <!--回数が1じゃない時、または秒数が1の時だけ〇〇回と表示-->
-                                {% if post.reps and post.sec and (post.reps[i]|int != 1 or post.sec[i]|int == 0) %}
+                                <!--回数が0じゃない時、または秒数が0の時だけ〇〇回と表示-->
+                                {% if post.reps and (post.reps[i]|int != 0 or post.sec[i]|int == 0) %}
                                     {{ post.reps[i] }}回
                                 {% endif %}
 
-                                {% if post.sec and post.sec[i]| int != 0 %}
+                                <!--秒数が0じゃない時、または秒数が0の時だけ〇〇回と表示-->
+                                {% if post.sec and (post.sec[i]|int != 0 or post.reps[i]|int == 0) %}
                                     {{ post.sec[i] }}秒
                                 {% endif %}
 
                                 <!-- 秒数が0じゃない時〇〇秒と表示-->
                                 {% if post.set_count %}
-                                    ×{{ post.set_count[i] }}セット
+                                    × {{ post.set_count[i] }}
                                 {% endif %}
-
-                                {# {% if post.other %}
-                                    {{ training.other }}
-                                {% endif %} #}
 
                             </li>
                             {% endfor %}
@@ -108,7 +105,7 @@
                 </div>
             </div>
 
-        </div> </div>
+        </div>
         {% endfor %}
    
 <div class="footer-menu">

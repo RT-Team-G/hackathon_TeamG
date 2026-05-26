@@ -152,11 +152,11 @@ INSERT INTO Posts (user_id, content) VALUES
 -- Trainingテーブル
 INSERT INTO Training (menu_name) VALUES 
 ('腕立伏せ'), ('膝つき腕立て伏せ'), ('スクワット'), ('ワイドスクワット'),('ランジ(足を踏み出す動作)'),
-('クランチ(腹筋上部)'), ('レッグレイズ(腹筋下部)'), ('ブランク(体幹)'), ('バックエクステンション(背筋)'),
+('クランチ(腹筋上部)'), ('レッグレイズ(腹筋下部)'), ('プランク(体幹)'), ('バックエクステンション(背筋)'),
 ('バービージャンプ'), ('マウンテンクライマー');
 -- Reactionテーブル
 INSERT INTO Reactions (reaction) VALUES 
-('🔥'), ('お疲れ！'), ('💯'), ('(・∀・)ｲｲﾈ!!');
+('👍'), ('🔥'), ('💪'), ('👏');
 
 -- Commentsテーブル
 INSERT INTO Comments (user_id, post_id, content) VALUES
@@ -170,5 +170,5 @@ INSERT INTO Post_Reaction (user_id, post_id, reaction_id) VALUES
 
 -- Post_Trainingテーブル
 INSERT INTO Post_Training (user_id, post_id, training_id, reps, training_time, set_count) VALUES
-(1, 2, 1, 10, 30, 3),
-(2, 1, 2, 20, 60, 2);
+(1, 2, 1, 10, 0, 3),
+(2, 1, 2, 20, 0, 2);

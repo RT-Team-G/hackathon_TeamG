@@ -154,16 +154,18 @@ def posts_list_view():
         for post in posts:
             
             #これ↓5/26エラー対策で追加しました
-            if 'sec' not in post:
-                post['sec'] = []
+            # if 'sec' not in post:
+            #     post['sec'] = []
                 
             if isinstance(post['menu_name'], str):
                 post['menu_name'] = json.loads(post['menu_name'])
             if isinstance(post['reps'], str):
                 post['reps'] = json.loads(post['reps'])
             # こめんと削除 一部追加
-            if 'sec' in post and isinstance(post['sec'], str):
-                 post['sec'] = json.loads(post['sec'])
+            # if 'sec' in post and isinstance(post['sec'], str):
+            #      post['sec'] = json.loads(post['sec'])
+            if isinstance(post['sec'], str):
+                post['sec'] = json.loads(post['sec'])
             if isinstance(post['set_count'], str):
                 post['set_count'] = json.loads(post['set_count'])
             post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
@@ -225,6 +227,7 @@ def create_comment(post_id):
     content = request.form.get('content', '').strip()
     if content == '':
         flash('コメント内容が空です','error')
+        return redirect(url_for('posts_list_detail_view', post_id=post_id))
     Comments.create(user_id, post_id, content) #Commentsクラス・create()
     return redirect(url_for('posts_list_detail_view', post_id=post_id))
 

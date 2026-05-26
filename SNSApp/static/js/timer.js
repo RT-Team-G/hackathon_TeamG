@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded' , () => {
 /* ======================================
     1. config
 ========================================= */
-const INITIAL_TIME_SECONDS = 60;
+const INITIAL_TIME_SECONDS = 0;
 const ONE_SECOND_MS = 1000;
 const SECONDS_PER_MINUTE = 60;
 
