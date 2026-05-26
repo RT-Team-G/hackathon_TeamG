@@ -13,7 +13,7 @@
 
 {% block content %}
 <div class="page_post_detail">
-    <main>
+    <body>
         <h2>頑張り詳細</h2>
         <div class="detail-card">
              <div class="post-main">
@@ -126,7 +126,7 @@
                 <div class="comment-body">
                     {{ comment.content }}
                 </div>
-
+            </div>
                 <!-- <div class="comment-action">
                     <form action="/comments/{{ comment.id }}/like" method="post" class="comment-like-form"> -->
                        <!--クロスサイト対策
@@ -137,14 +137,13 @@
                        </button> 
                     </form>
                 </div>
-            </div> -->
             {% endfor %}
         {% else %}
             <p class="no-comments">まだコメントがありません</p>
         {% endif %}
         </div>
 
-    </main>
+    </body>
     <div class="footer-menu">
         <a href="{{ url_for('posts_list_view') }}" class="footer-btn">トップ</a>
     </div>
