@@ -2,9 +2,10 @@ document.addEventListener('DOMContentLoaded' , () => {
 /* ======================================
     1. config
 ========================================= */
-const INITIAL_TIME_SECONDS = 0;
+const INITIAL_TIME_SECONDS = 60;
 const ONE_SECOND_MS = 1000;
 const SECONDS_PER_MINUTE = 60;
+const alarmSound = new Audio('https://assets.mixkit.co/active_storage/sfx/995/995-preview.mp3');
 
 let timerLeft = INITIAL_TIME_SECONDS;
 let timerId = null;
@@ -31,8 +32,10 @@ function updateDisplay() {
 function setButtonsState(isRunning) {
     if (isRunning) {
         toggleBtn.textContent = 'ストップ';
+        toggleBtn.classList.add('is-active');
     } else {
         toggleBtn.textContent = 'スタート';
+        toggleBtn.classList.remove('is-active');
     }
 
     adjustBtns.forEach(btn => {
@@ -52,7 +55,8 @@ function startCountdown() {
         updateDisplay();
         
         if (timerLeft <= 0) {
-            stopCountdown()
+            stopCountdown();
+            alarmSound.play();
         }
     }, ONE_SECOND_MS);
 }
@@ -69,8 +73,10 @@ function stopCountdown() {
 // スタートとストップを統合
 toggleBtn.addEventListener('click', () => {
     if (timerId === null) {
-        setButtonsState(true);
-        startCountdown();
+        if (timerLeft > 0) {
+            setButtonsState(true);
+            startCountdown();
+        }
     } else {
         stopCountdown()
     }

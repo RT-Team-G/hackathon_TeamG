@@ -19,24 +19,24 @@
 {% endblock %}
 
 {% block content %}
-	<div class="らっぷ的なね">
-		<div class="timer-container">
-			<div class="timer-display" id="timer-display">00:00</div>
-			<div class="timer-adjust">
-				<button class="btn-adjust" data-time="60">＋1分</button>
-				<button class="btn-adjust" data-time="30">＋30秒</button>
-				<button class="btn-adjust" data-time="10">＋10秒</button>
-			</div>
-			<div class="timer-controls">
-				<button class="btn-reset" id="reset-btn">リセット</button>
-				<button class="btn-toggle" id="toggle-btn">スタート</button>
-			</div>
+<div class="timer-wrapper">
+	<div class="timer-container">
+		<div class="timer-display" id="timer-display">00:00</div>
+		<div class="timer-adjust">
+			<button class="btn-adjust" data-time="60">＋1分</button>
+			<button class="btn-adjust" data-time="30">＋30秒</button>
+			<button class="btn-adjust" data-time="10">＋10秒</button>
 		</div>
-		<div class="footer-menu">
-			<a href="./posts_list" class="footer-btn">トップ</a>
-			<a href="./post" class="footer-btn">トレーニング</a>
+		<div class="timer-controls">
+			<button class="btn-reset" id="reset-btn">リセット</button>
+			<button class="btn-toggle" id="toggle-btn">スタート</button>
 		</div>
 	</div>
+	<div class="footer-menu">
+		<a href="./posts_list" class="footer-btn">トップ</a>
+		<a href="./post" class="footer-btn">トレーニング</a>
+	</div>
+</div>
 	<script src="{{ url_for('static', filename = 'js/timer.js') }}" defer></script>
 {% endblock %}
 
