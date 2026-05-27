@@ -147,8 +147,8 @@ button {
 
 .add-btn {
     width: 100%;
-    background-color: #ffffff;
-    color: #9b72e5;
+    background-color:rgba(255,255,255,0.2);
+    color: #2D21AC;
     border: 2px dashed #9b72e5;
     padding: 15px;
     border-radius: 12px;
@@ -187,6 +187,28 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.post-btn span {
+    display: inline-block;
+    animation: doneBounce 0.8s ease-out;
+}
+
+@keyframes doneBounce {
+    0% {
+        transform: scale(1.5);
+    }
+    40% {
+        transform: scale(0.85);
+    }
+    60% {
+        transform: scale(1.08);
+    }
+    80% {
+        transform: scale(0.96);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* ボタンの非表示 */
