@@ -193,8 +193,8 @@ def posts_list_detail_view(post_id):
         post['reps'] = json.loads(post['reps'])
     #コメント削除
     #↓ここ加えました5/26
-    if 'sec' not in post:
-        post['sec'] = []
+    # if 'sec' not in post:
+    #     post['sec'] = []
     
     if isinstance(post['sec'], str):
          post['sec'] = json.loads(post['sec'])
@@ -202,7 +202,6 @@ def posts_list_detail_view(post_id):
         post['set_count'] = json.loads(post['set_count'])
     post['created_at'] = post['created_at'].strftime('%Y-%m-%d %H:%M')
     post['user_name'] = User.get_name_by_id(post['user_id'])
-    # post['reaction'] = Reactions.count_reaction(post['reaction'])
 
     # リアクション表示(DBから取得→表示)
     reactions = Reactions.get_reaction(post_id)

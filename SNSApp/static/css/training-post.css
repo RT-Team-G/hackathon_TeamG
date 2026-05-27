@@ -250,3 +250,26 @@ button {
     border-top:1px solid rgba(255,255,255,0.5);
     border-left:1px solid rgba(255,255,255,0.4);
 }
+
+/* ログアウト画像 */
+.logout {
+    display: block;
+    width: 100%;
+    max-width: 600px;    
+    margin: 0 0 0 auto;
+    box-sizing: border-box;
+}
+
+.logout a {
+    display: block;
+    margin-left: auto;
+    width: 38px;
+    height: 38px;
+}
+
+.logout img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

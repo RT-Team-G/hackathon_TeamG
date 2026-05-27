@@ -21,7 +21,9 @@
 
 
 <div class="page-posts">
-    
+        <div class="signout">
+            <a href="/logout"><img src="{{ url_for('static', filename='images/logout.png') }}" alt="ログアウト画像"></a>
+        </div>
         <div  class="page-title">
             <h2>みんなの頑張り（仮）</h2>
         </div>
@@ -100,7 +102,7 @@
                 <div class="post-footer">
                     <div class="post-actions">
                         <!-- 詳細・コメント画面へ（GET /posts/{post_id}） -->
-                        <a class="post-btn " href="/posts_list/{{ post.id }}">💬 <span class="count">{{ post.comments_count }}</span></a>
+                        <a class="post-btn " href="/posts_list/{{ post.id }}"><span class="font">コメント</span> 💬 <span class="count">{{ post.comments_count }}</span></a>
                     </div>
                 </div>
             </div>

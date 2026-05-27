@@ -192,6 +192,13 @@ img{
     vertical-align: middle;
 }
 
+.font {
+    margin: 0;
+    font-size: 14px;
+    color:#2D21AC;
+    vertical-align: middle;
+}
+
 .count{
     font-size: 12px;
     vertical-align: middle;
@@ -474,4 +481,48 @@ span.comment-time{
     border-left:1px solid rgba(255,255,255,0.4);
     margin: 32px auto;
     cursor: pointer;
+}
+
+/* ログアウト画像 */
+.logout {
+    align-self: flex-end;
+    margin: 0;
+    width: 100%;
+    max-width: 586px;
+}
+
+.logout a {
+    display: block;
+    width: 38px;
+    height: 38px;
+    object-fit: cover;
+}
+
+.logout img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.signout {
+    display: flex;
+    align-self: flex-end;
+    width: 100%;
+    max-width: 900px;
+    justify-content: flex-end;
+    box-sizing: border-box;
+}
+
+.signout a {
+    display: block;
+    width: 38px;
+    height: 38px;
+}
+
+.signout img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
