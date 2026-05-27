@@ -266,10 +266,10 @@ span.comment-time{
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 56px;
+    min-height: 40px;
     white-space: nowrap;
-    padding:0 12px;
-    font-size: 7px;
+    padding:0 10px;
+    font-size: 13px;
 
     width: auto;
     margin-top: 8px;
@@ -281,7 +281,7 @@ span.comment-time{
     backdrop-filter: blur(10px);
     border-top:1px solid rgba(255,255,255,0.5);
     border-left:1px solid rgba(255,255,255,0.4);
-    border-radius: 8px;
+    border-radius: 12px;
 }
 
 /*フッターっぽいところにあるボタン用のところ*/
@@ -472,6 +472,6 @@ span.comment-time{
     backdrop-filter: blur(10px);
     border-top:1px solid rgba(255,255,255,0.5);
     border-left:1px solid rgba(255,255,255,0.4);
-    margin-bottom: 32px;
+    margin: 32px auto;
     cursor: pointer;
 }
