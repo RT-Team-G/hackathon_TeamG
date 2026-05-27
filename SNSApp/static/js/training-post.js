@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded' , () => {
         });
 
         // 状態を更新
+        currentCard.parentNode.appendChild(currentCard); // 非表示にしたカード要素を末尾へ移動
         updateButtonStatus();
     });
 
