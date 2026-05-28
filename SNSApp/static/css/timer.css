@@ -29,7 +29,7 @@
     box-sizing: border-box;
     margin: 0px auto;
 
-    color: #2D21AC;
+    color: #f7f6fc;
     border: 1px solid rgba(51, 51, 51, 0.3);
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow: 10px 5px 5px #cfcfd0;
@@ -74,7 +74,7 @@
     white-space: nowrap;
     transition: all 0.2s ease;
 
-    color: #2D21AC;
+    color: #f7f6fc;
     border: 1px solid rgba(51, 51, 51, 0.3);
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow: 4px 4px 5px rgba(207, 207, 208, 0.6);
