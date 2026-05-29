@@ -30,12 +30,12 @@ h1{
 h2{
     text-shadow: 2px 2px 4px rgba(173, 153, 237, 0.5);
     text-align: center;
-    margin:16px auto 32px auto;
+    margin:24px auto 32px auto;
 }
 
 a{
     text-decoration: none;
-    color:#24140e;
+    color:#fffcfb;
 }
 
 button{
@@ -327,11 +327,25 @@ span.comment-time{
 /*できたスタンプ見たいなもの角度とかここで調節。文字変えたい時はhtmlの方で*/
 .dekita{
     position:absolute ;
-    top:-20px;
-    left: -20px;
+    top:-40px;
+    left: -30px;
     transform: rotate(-30deg);
     color: rgb(253, 242, 242);
     opacity: 0.5;
+    font-size: 24px;
+    font-weight: 400;
+    animation: poyo 1.5s infinite;
+}
+@keyframes poyo {
+    0% {
+        transform: rotate(-30deg) scale(1);
+    }
+    50% {
+        transform: rotate(-30deg) scale(1.2);
+    }
+    100% {
+        transform: rotate(-30deg) scale(1);
+    }
 }
 
 /*パンくずリストのところ*/
@@ -365,7 +379,6 @@ nav.breadcrumb{
 
 .auth-title, .card-subtitle{
     display: flex;
-
 }
 
 .auth-title{
@@ -417,6 +430,7 @@ nav.breadcrumb{
   border: none;
   border-radius: 16px;
   padding: 12px 16px;
+  color:#f7f6f5;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -428,12 +442,12 @@ nav.breadcrumb{
   width: 100%;
   background-color: rgba(255,255,255,0.2);
 
-  margin:32px auto 8px auto;
+  margin:24px auto 8px auto;
 }
 
 
 .auth-button:hover {
-  background: #e9dded;
+  background: #f9f7fa;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.35),
     0 0 12px rgba(124,77,255,0.18);
