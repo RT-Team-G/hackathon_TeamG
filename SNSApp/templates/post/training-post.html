@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+<!--パンくずのところ-->
+{% block breadcrumb%}
+<nav class="breadcrumb">
+    <a href="/">トップ</a>
+    <span>＞</span>
+	<a href="/training-post">トレーニング</a>
+	<span>＞</span>
+
+</nav>
+{% endblock %}
+
+{% block title %} トレーニング選択・投稿画面 {% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/training-post.css') }}">
+{% endblock %}
+
+  {% block content %}
+
+  <div class="page-posts">
+    <!-- メイン -->
+    <!--<main>-->
+      <div class="logout">
+        <a href="/logout"><img src="{{ url_for('static', filename='images/logout.png') }}" alt="ログアウト画像"></a>
+      </div>
+      <div class="title-group">
+        <h2 class="page-title">今日のトレーニング</h2>
+        <small class="page-note">※複数選択可</small>
+      </div>
+      <form class="training-post-form" action="/post" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="cards-wrapper">
+          {% for i in range(5) %}
+            <div class="training-post-card {% if loop.first %}is-visible{% endif %}">
+              <div class="remove-btn-wrapper">
+                <button type="button" class="remove-btn" aria-label="削除">✕</button>
+              </div>
+              <div class="training-post-field"> 
+                <select class="main-select" name="menu[]">  <!-- requiredは削除 -->
+                  <option value="" disabled selected hidden>選んでください</option>
+                  {% for choice in choices %}
+                  <option value="{{ choice.id }}">{{ choice.menu_name }}</option>
+                  {% endfor %}
+                  <!-- <option value="other">その他</option> 仮置き -->
+                </select>
+              </div>
+              <!-- <div class="training-post-field other-input-wrapper">
+                <input type="text" name="other[]" placeholder="トレーニング名を入力">
+              </div> -->
+              <div class="training-post-field is-right">
+                <label>
+                  <select name="reps[]">
+                    <option value="0" selected>0</option>
+                    {% for j in range(5, max_reps | default(50)+1, 5) %}
+                    <option value="{{ j }}">{{ j }}</option>
+                    {% endfor %}
+                  </select>
+                  回
+                </label>
+                <!--秒-->
+                <label>
+                  <select name="sec[]">
+                    <option value="0" selected>0</option>
+                    {% for s in range(10, 125, 10) %}
+                    <!-- デフォルトで10秒を選択状態にする-->
+                    <option value="{{ s }}">{{ s }}</option>
+                    {% endfor %}
+                  </select>
+                  秒
+                </label>
+                <label>
+                  <select name="set_count[]">
+                    {% for k in range(max_sets | default(5)) %}
+                    <option value="{{ k+1 }}">{{ k+1 }}</option>
+                    {% endfor %}
+                  </select>
+                  セット
+                </label>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="add-btn-wrapper">
+            <button type="button" class="add-btn" style="cursor: pointer;">項目を追加</button>
+          </div>
+        <div>
+          <textarea placeholder="自由記述欄（感想や言い訳など・・）" name="content"></textarea>
+        </div>
+        <button type="submit" class="post-btn" style="cursor: pointer;"><span>できた</span></button>
+      </form>
+    <!--</main>-->
+    <div class="footer-menu">
+    <a href="./posts_list" class="footer-btn">トップ</a>
+    <a href="./timer" class="footer-btn">タイマー</a>
+</div>
+  </div>
+
+    <script src="{{ url_for('static', filename='js/training-post.js') }}" defer></script>
+
+ <script>
+  // 読み込み準備
+  document.addEventListener('DOMContentLoaded', function() {
+    // 画面内の全てのトレーニングカードをし処理
+    const cards = document.querySelectorAll('.training-post-card');
+    // 1枚ずつ処理
+    cards.forEach(card => {
+      // 回数を選ぶセレクトボックスを見つけてrepSelectにする
+      const repsSelect = card.querySelector('select[name="reps[]"]');
+      // 秒数セレクト
+      const secSelect = card.querySelector('select[name="sec[]"]');
+      // もし見つからない場合はこのカードの処理をスキップする
+      if (!repsSelect || !secSelect) return;
+      // labelの回と書いてるの名前をrepsLabelにする
+      const repsLabel = repsSelect.closest('label');
+      // 秒をsecLabelに
+      const secLabel = secSelect.closest('label');
+      // 秒数を変更したら
+      secSelect.addEventListener('change', function() {
+        // 0秒以外なら回数を隠す
+        if (this.value !== "0") {
+          repsLabel.style.display = 'none';
+          repsSelect.value = "0"; // 裏データは0 (秒数を表示)
+        } else {
+          // 回数を選ぶなら秒数を表示
+          repsLabel.style.display = 'inline-block';
+          repsSelect.value = "0"; //回数初期0回に戻す
+        }
+      });
+
+      // 回数のセレクトボックスが変更されたとき
+      repsSelect.addEventListener('change', function() {
+        //回数が選ばれたなら秒数を0にして非表示
+        if (this.value !== "0") {
+          //秒数を隠す(10秒～)
+          secLabel.style.display = 'none';
+          secSelect.value = "0"; // 0秒(初期値)
+        } else {
+          // 回数を選ぶなら秒数を復活
+          secLabel.style.display = 'inline-block';
+          secSelect.value = "0"; //秒数の初期値を0秒に戻す
+        }
+      });
+
+      // もし種目セレクトボックスが変更されたら療両方リセット
+      const mainSelect = card.querySelector('.main-select');
+      if (mainSelect) {
+        mainSelect.addEventListener('change', function() {
+          repsLabel.style.display = 'inline-block';
+          secLabel.style.display = 'inline-block';
+          repsSelect.value = "0"; // 種目かえたら回数を0にリセット
+          secSelect.value = "0"; // 種目をかえたら秒数を0にリセット
+        });
+      }
+    });
+  });
+ </script>
+  {% endblock %}

@@ -1,0 +1,129 @@
+/* * {
+    outline: 1px solid blue;
+} */
+
+/* ======================================
+   1. 全体
+========================================= */
+.timer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    min-height: calc(100vh - 100px);
+    gap: 32px;
+}
+
+/* ======================================
+   2. タイマーカード
+========================================= */
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 48px 16px;
+    gap: 32px;
+    box-sizing: border-box;
+    margin: 0px auto;
+
+    color: #f7f6fc;
+    border: 1px solid rgba(51, 51, 51, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35),
+    0 0 12px rgba(124,77,255,0.18);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+}
+
+/* ======================================
+   3. タイマー時間
+========================================= */
+.timer-display {
+    font-size: 64px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    line-height: 1;
+}
+
+/* ======================================
+   4. ボタン
+========================================= */
+.timer-adjust, 
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+}
+
+/* ======================================
+   5. ボタン共通
+========================================= */
+.btn-adjust,
+.btn-reset,
+.btn-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+
+    color: #f7f6fc;
+    border: 1px solid rgba(51, 51, 51, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35),
+    0 0 12px rgba(124,77,255,0.18);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* ======================================
+   6. ボタンサイズ調整
+========================================= */
+.btn-adjust {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.btn-reset,
+.btn-toggle {
+    height: 48px;
+    width: 120px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ======================================
+   7. 動き
+========================================= */
+.btn-adjust:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.btn-toggle.is-active {
+    background-color: rgba(220, 38, 38, 0.2);
+    border-color: rgba(220, 38, 38, 0.5);
+    color: #d32f2f;
+}
+
+.btn-adjust:active:not(:disabled),
+.btn-reset:active,
+.btn-toggle:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+
+
+
+

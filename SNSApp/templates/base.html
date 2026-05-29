@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--このファイルは全ぺーじ共通のレイアウトが書かれてます。-->
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}トレシェア{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {# cssのファイルを読み込む↓ #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/color.css')}}">
+    {# また追加したい時この下の間に挟むっぽい #}
+    {% block page_css %}{% endblock%}
+
+</head>
+
+<body>
+    <header>
+    {# header.htmlの部分を継承することが書いてある #}
+     {% include 'common/header.html' %}
+    {#  ↓パンくずのブロック作った #}
+     {% block breadcrumb %}
+     {% endblock%}
+    </header>
+
+     {# 今度はここにcontentが入ることがある #}
+     {% block content%}{% endblock %}
+
+     {# 最後にフッターが入ることがある #}
+     {% include 'common/footer.html'%}
+
+</body>
+
+</html>

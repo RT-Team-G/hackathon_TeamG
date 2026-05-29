@@ -1,0 +1,279 @@
+/* ======================================
+   1. ベース＆レイアウト
+========================================= */
+.page-posts {
+    max-width: 400px;
+    margin: 0px auto;
+    padding: 1px 20px;
+}
+
+.title-group {
+    width: fit-content;
+    margin: 10px auto;
+}
+
+/* ======================================
+   2. ページタイトルと注釈テキスト
+========================================= */
+.page-title {
+    margin-bottom: 5px;
+}
+
+.page-note {
+    display: block;
+    font-size: 12px;
+    color: #efebeb;
+    font-weight: normal;
+}
+
+/* ======================================
+   3. フォーム共通要素
+========================================= */
+.training-post-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.training-post-form textarea,
+.main-select,
+.is-right select,
+.other-input-wrapper input {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+}
+
+/* 個別調整 */
+.training-post-form textarea {
+    min-height: 100px;
+    resize: vertical;
+    background: #fdfcff;
+    border: 1px solid #e6e0f8;
+    border-radius: 12px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.training-post-form textarea::placeholder {
+    color: #a09eb0;
+}
+
+.is-right select {
+    width: 60px;
+}
+
+.cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ======================================
+   4. カード＆アニメーション
+========================================= */
+/* カード全体のスタイル、一旦むらさきにしてます? */
+.training-post-card {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    padding: 35px 15px 15px 15px;
+    position: relative;
+    padding-top: 50px;
+    border: 1px solid rgba(51,51,51,0.3);
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35),
+    0 0 12px rgba(124,77,255,0.18);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,0.5);
+    border-left: 1px solid rgba(255,255,255,0.4);
+    border-radius: 12px;
+}
+
+/* 表示に関するちょっとしたアニメーションです */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* JSで付与する際のクラス&アニメーション */
+.training-post-card.is-visible {
+    display: flex;
+    animation: fadeInUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* その他の入力欄を非表示に */
+.training-post-field.other-input-wrapper {
+    display: none;
+    margin-top: 10px;
+}
+
+/* ======================================
+セレクトボックス
+========================================= */
+.training-post-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+}
+
+/* ======================================
+5. ボタン類
+========================================= */
+button {
+    border: none;
+    background: transparent;
+}
+
+/* 削除（✕）ボタン */
+.remove-btn-wrapper {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.remove-btn {
+    width: auto;
+    height: auto;
+    font-size: 20px;
+    color: #f7f6fc;
+    padding: 5px 10px;
+    background: transparent;
+    border: none;
+}
+
+/* 追加ボタン */
+.add-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.add-btn {
+    width: 100%;
+    height: auto;
+    background-color: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    color: rgba(155, 114, 229, 0.7);
+    border: 2px dashed rgba(155, 114, 229, 0.3);
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35),
+    0 0 12px rgba(124,77,255,0.18);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-btn::before {
+    content: "＋";
+    font-size: 20px;
+}
+
+.training-post-field.is-right { /* ここもっかい確認しなければ */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.post-btn {
+    align-self: flex-end;
+    margin: 0;
+    padding: 8px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    font-weight: normal;
+    font-size: 16px;
+
+    color: #f7f6fc;
+    background-color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(51,51,51,0.3);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35),
+    0 0 12px rgba(124,77,255,0.18);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255,255,255,0.5);
+    border-left: 1px solid rgba(255,255,255,0.4);
+    cursor: pointer;
+}
+
+.post-btn span {
+    display: inline-block;
+    animation: doneBounce 0.8s ease-out;
+}
+
+@keyframes doneBounce {
+    0% {
+        transform: scale(1.5);
+    }
+    40% {
+        transform: scale(0.85);
+    }
+    60% {
+        transform: scale(1.08);
+    }
+    80% {
+        transform: scale(0.96);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ボタンの非表示 */
+.add-btn:disabled,
+.remove-btn:disabled {
+    color: #ccc;
+    opacity: 0.5;
+}
+
+/*すみません追加してみてます*/
+.training-post-form textarea{
+    border: 1px solid rgba(51,51,51,0.3);
+    background-color: rgba(255,255,255,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35),
+    0 0 12px rgba(124,77,255,0.18);
+    backdrop-filter: blur(10px);
+    border-top:1px solid rgba(255,255,255,0.5);
+    border-left:1px solid rgba(255,255,255,0.4);
+}
+
+/* ログアウト画像 */
+.logout {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 0 0 auto;
+    box-sizing: border-box;
+}
+
+.logout a {
+    display: block;
+    margin-left: auto;
+    width: 38px;
+    height: 38px;
+}
+
+.logout img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
