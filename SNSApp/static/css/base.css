@@ -420,9 +420,11 @@ nav.breadcrumb{
 }
 
 .auth-form input[type="text"]:focus,
-.auth-form input[type="password"]:focus {
+.auth-form input[type="password"]:focus,
+.auth-form input[type="email"] {
   border-color: rgba(37, 99, 235, 0.9);
   background: #ffffff;
+  color:#222;
   box-shadow: inset 10px 5px 5px #efeff8;
 }
 
@@ -448,6 +450,7 @@ nav.breadcrumb{
 
 .auth-button:hover {
   background: #f9f7fa;
+  color:#222;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.35),
     0 0 12px rgba(124,77,255,0.18);
@@ -457,7 +460,9 @@ nav.breadcrumb{
   transform: translateY(0);
   box-shadow: 0 4px 10px rgba(37, 99, 235, 0.18);
 }
-
+.swith-auth:hover{
+    color:#222;
+}
 
 /* フラッシュメッセージ */
 .flash {
