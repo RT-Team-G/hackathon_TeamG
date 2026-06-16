@@ -249,7 +249,10 @@ def add_reaction(post_id):
         select_reaction = int(request.form.get('reaction_id'))
         Reactions.add_reaction(user_id, post_id, select_reaction)
 
-    return redirect(url_for('posts_list_detail_view', post_id=post_id))
+        reaction_count = Reactions.get_reaction(post_id)
+
+    # return redirect(url_for('posts_list_detail_view', post_id=post_id))
+    return jsonify('reaction_count': reaction_count)
 
 if __name__=='__main__':
     app.run(host="0.0.0.0", debug=True)
