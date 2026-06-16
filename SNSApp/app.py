@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, session, flash, abort, url_for
+from flask import Flask, request, redirect, render_template, session, flash, abort, url_for, jsonify
 from flask_wtf.csrf import CSRFProtect
 from datetime import timedelta
 from util.DB import DB
@@ -252,7 +252,7 @@ def add_reaction(post_id):
         reaction_count = Reactions.get_reaction(post_id)
 
     # return redirect(url_for('posts_list_detail_view', post_id=post_id))
-    return jsonify('reaction_count': reaction_count)
+    return jsonify({'reaction_count': reaction_count})
 
-if __name__=='__main__':
+if __name__=='__main__':    
     app.run(host="0.0.0.0", debug=True)

@@ -145,7 +145,9 @@
             <p class="no-comments">まだコメントがありません</p>
         {% endif %}
         </div>
-
+    <!-- js読み込み -->
+    <script src="{{ url_for('static', filename='js/reaction.js') }}"></script>
+    
     </body>
     <div class="footer-menu">
         <a href="{{ url_for('posts_list_view') }}" class="footer-btn">トップ</a>
