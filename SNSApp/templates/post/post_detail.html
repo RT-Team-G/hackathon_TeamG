@@ -85,14 +85,15 @@
                 <div class="reaction-list">
                     <div class="post-btn">💬 <span class="count">{{ post.comments_count }}</span></div>
                     {% for reaction_kind in reactions %}
-                    <span class="reaction">
+                    <!-- <span class="reaction"> -->
                         <form class="reaction" action="/posts_list/{{ post.id }}/reaction" method="post">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                             <button class="reaction_btn" type="submit" name="reaction_id" value="{{ reaction_kind.id }}">
-                                {{ reaction_kind.reaction }} {{ reaction_kind.count }}
+                                {{ reaction_kind.reaction }} 
+                                <span class = "count-text">{{ reaction_kind.count }}</span>
                             </button>
                         </form>
-                    </span>
+                    <!-- </span> -->
                     {% endfor %}
                 </div>
                 <!--コメント投稿(クラスpost)-->
