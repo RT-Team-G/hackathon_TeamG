@@ -12,6 +12,7 @@ class Reactions:
     def get_reaction(cls, post_id):
         # プールから接続
         conn = db_pool.get_conn()
+        conn.ping(reconnect=True)
         try:
             # カーソル作成
             with conn.cursor() as cur:
