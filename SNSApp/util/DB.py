@@ -1,7 +1,6 @@
 import os #パスワードやポート番号を引っ張る
 import pymysql 
 from pymysqlpool.pool import Pool
-#↑pymysqlpoolに、.poolを加えた（ゆかポジ）
 
 class DB:
     @classmethod
@@ -23,7 +22,8 @@ class DB:
             cursorclass=pymysql.cursors.DictCursor,
             autocommit=True #確定させる
 
-
+            # 追加：プールから接続を取り出す際に死活監視を行い、自動再接続を有効にする
+            ping=1
         )
         #コネクションプールの初期化
         pool.init()

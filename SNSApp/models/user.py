@@ -12,7 +12,6 @@ class User:
     def create(cls, name, email, password):
         # 新しくユーザーをDBに登録する
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
             # カーソルを作成withで終わったら自動で閉じてくれる
             with conn.cursor() as cur:

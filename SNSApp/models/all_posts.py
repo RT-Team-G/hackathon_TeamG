@@ -10,7 +10,6 @@ class All_Post:
     @classmethod
     def get_all(cls):
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
             with conn.cursor(pymysql.cursors.DictCursor) as cur:
                 sql = """

@@ -11,7 +11,6 @@ class Comments:
     #コメント作成
     def create(cls, user_id, post_id, content):
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
             #カーソル作成
             with conn.cursor() as cur:

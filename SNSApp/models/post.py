@@ -11,7 +11,6 @@ class Post:
     #投稿をIDで一件検索
     def find_by_id(cls, post_id):
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
             #カーソル作成 pymysql.cursors.DictCursor追加
             with conn.cursor(pymysql.cursors.DictCursor) as cur:

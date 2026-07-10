@@ -16,7 +16,6 @@ class Menu:
     # クラスメソッド - clsを通じてクラスの属性にアクセス
     def get_menu(cls):
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         # 例外処理
         try:
             with conn.cursor(pymysql.cursors.DictCursor) as cur:  #connでDB接続→カーソル取得 カーソル通じてクエリを実行
