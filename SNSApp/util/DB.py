@@ -20,7 +20,7 @@ class DB:
             charset="utf8mb4",
             # カーソルクラス (辞書型でフェッチ) {'id': 1, 'name': 'hoge'}
             cursorclass=pymysql.cursors.DictCursor,
-            autocommit=True #確定させる
+            autocommit=True, #確定させる
 
             # 追加：プールから接続を取り出す際に死活監視を行い、自動再接続を有効にする
             ping=1
