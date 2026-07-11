@@ -12,8 +12,8 @@ class Reactions:
     def get_reaction(cls, post_id):
         # プールから接続
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
+            conn.ping(reconnect=True)
             # カーソル作成
             with conn.cursor() as cur:
                 sql = """
@@ -41,6 +41,7 @@ class Reactions:
         # プールから接続
         conn = db_pool.get_conn()
         try:
+            conn.ping(reconnect=True)
             #カーソル作成
             with conn.cursor() as cur:
                 # 既に登録があるか確認のため抽出

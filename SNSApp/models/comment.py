@@ -11,8 +11,8 @@ class Comments:
     #コメント作成
     def create(cls, user_id, post_id, content):
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
+            conn.ping(reconnect=True)
             #カーソル作成
             with conn.cursor() as cur:
                 #SQL文
@@ -32,6 +32,7 @@ class Comments:
     def get_by_post_id(cls, post_id):
         conn = db_pool.get_conn()
         try:
+            conn.ping(reconnect=True)
             #カーソル作成
             with conn.cursor() as cur:
                 #SQL文
@@ -52,6 +53,7 @@ class Comments:
     def count_by_comment(cls, post_id):
         conn = db_pool.get_conn()
         try:
+            conn.ping(reconnect=True)
             # カーソル作成
             with conn.cursor() as cur:
                 # SQL文

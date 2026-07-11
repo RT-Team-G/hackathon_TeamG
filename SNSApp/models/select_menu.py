@@ -16,9 +16,9 @@ class Menu:
     # クラスメソッド - clsを通じてクラスの属性にアクセス
     def get_menu(cls):
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         # 例外処理
         try:
+            conn.ping(reconnect=True)
             with conn.cursor(pymysql.cursors.DictCursor) as cur:  #connでDB接続→カーソル取得 カーソル通じてクエリを実行
                 sql = 'SELECT * FROM Training'
                 cur.execute(sql) #execute()でクエリ実行
@@ -45,6 +45,7 @@ class Rec:
 
         conn = db_pool.get_conn()
         try:
+            conn.ping(reconnect=True)
             with conn.cursor(pymysql.cursors.DictCursor) as cur:
                 sql_1 = "INSERT INTO Posts (user_id, content) VALUES (%s, %s);"
                 cur.execute(sql_1, (user_id, content))
