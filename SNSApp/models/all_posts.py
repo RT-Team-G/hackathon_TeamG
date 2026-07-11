@@ -10,8 +10,8 @@ class All_Post:
     @classmethod
     def get_all(cls):
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
+            conn.ping(reconnect=True)
             with conn.cursor(pymysql.cursors.DictCursor) as cur:
                 sql = """
                         SELECT pt.post_id AS id, JSON_ARRAYAGG(t.menu_name) AS menu_name, JSON_ARRAYAGG(pt.reps) AS reps, JSON_ARRAYAGG(pt.set_count) AS set_count, JSON_ARRAYAGG(pt.training_time) AS sec, MAX(pt.created_at) AS created_at, ANY_VALUE(p.content) AS content, ANY_VALUE(p.user_id) AS user_id 

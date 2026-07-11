@@ -12,8 +12,8 @@ class User:
     def create(cls, name, email, password):
         # 新しくユーザーをDBに登録する
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
+            conn.ping(reconnect=True)
             # カーソルを作成withで終わったら自動で閉じてくれる
             with conn.cursor() as cur:
                 # SQL文の指示%はSQLインジェクションの対策
@@ -39,8 +39,8 @@ class User:
     def find_by_email(cls, email):
         #接続する
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
+            conn.ping(reconnect=True)
             #SQLを実行するカーソル
             with conn.cursor() as cur:
                 #SQL文
@@ -63,8 +63,8 @@ class User:
     def get_name_by_id(cls, user_id):
         #接続する
         conn = db_pool.get_conn()
-        conn.ping(reconnect=True)
         try:
+            conn.ping(reconnect=True)
             #SQLを実行するカーソル
             with conn.cursor() as cur:
                 #SQL文
