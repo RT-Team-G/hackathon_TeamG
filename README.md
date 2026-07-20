@@ -5,7 +5,7 @@
 トレーニング記録の投稿や閲覧を通じて、ユーザー同士がモチベーションを高め合い、継続的な運動習慣の形成を支援します。
 
 ## ⚪︎公開URL  
-　http://35.79.203.132
+　https://training-sharing.jp
 
 ## ⚪︎GitHub  
 　https://github.com/RT-Team-G/hackathon_TeamG/tree/reaction_test
@@ -65,7 +65,13 @@
 　　 ↓  
 　Docker  
 　　 ↓  
-　AWS EC2  
+   Nginx
+     ↓
+　  EC2
+     ↓
+  CloudFront
+     ↓
+  Route 53  
 
 ## ⚪︎工夫した点  
 　1. チーム開発  
@@ -79,14 +85,15 @@
 　　ハッカソンではローカル環境のみでしたが、その後AWS EC2へデプロイを行い、実際に公開可能なWebサービスとして構築しました。  
 
 ## ⚪︎今後の改善点  
-　・Nginx導入  
-　・HTTPS対応    
+　・Nginx導入  →　リバースプロキシとして導入完了 
+　・HTTPS対応　→　Route53-CloudFront-EC2 構築完了
 
 ## ⚪︎担当箇所  
 　・チームリーダー  
 　・バックエンド開発  
 　・Docker環境構築  
 　・AWS EC2デプロイ  
+  ・Nginx導入及びHTTPS対応
 　・Ajax実装  
 　・フロントエンド一部実装  
 
