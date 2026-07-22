@@ -57,21 +57,20 @@
  ・GitHub
 
 ## ⚪︎システム構成  
-　ブラウザ. 
-    ↓  
- Route 53. 
-    ↓  
-CloudFront. 
-    ↓  
-   EC2. 
-    ↓  
-  Nginx. 
-    ↓  
-　Docker  
-    ↓  
-Flask(Python). 
-    ↓. 
-  MySQL  
+## ⚪︎システム構成
+```text
+ブラウザ
+  ↓
+Route 53
+  ↓
+CloudFront
+  ↓
+EC2 (Nginx / Docker)
+  ↓
+Flask (Python)
+  ↓
+MySQL
+```
   
 ## ⚪︎担当箇所  
 　・チームリーダー
